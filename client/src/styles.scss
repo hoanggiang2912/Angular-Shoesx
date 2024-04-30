@@ -1,0 +1,522 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+@import "styles/variables";
+
+// Path: client/src/styles.css
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+select,
+textarea {
+  background-color: transparent;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+}
+
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.poa {
+  position: absolute;
+}
+
+.abs-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.abs-centerX {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.abs-centerY {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@each $offset-name, $offset-value in $offsets {
+  .top-#{$offset-name} {
+    top: $offset-value;
+  }
+
+  .right-#{$offset-name} {
+    right: $offset-value;
+  }
+
+  .bottom-#{$offset-name} {
+    bottom: $offset-value;
+  }
+
+  .left-#{$offset-name} {
+    left: $offset-value;
+  }
+}
+
+.por {
+  position: relative;
+}
+
+.pof {
+  position: fixed;
+}
+
+.fixed-full {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.font-xs {
+  font-size: 12px;
+}
+
+.font-sm {
+  font-size: 14px;
+}
+
+.font-base {
+  font-size: 16px;
+}
+
+.font-lg {
+  font-size: 18px;
+}
+
+.font-xl {
+  font-size: 20px;
+}
+
+/* Font weight */
+.font-light {
+  font-weight: 300;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+/* Line height */
+.leading-tight {
+  line-height: 1.25;
+}
+
+.leading-normal {
+  line-height: 1.5;
+}
+
+.leading-loose {
+  line-height: 2;
+}
+
+/* Text color */
+.text-primary {
+  color: #1a202c;
+  /* A dark gray */
+}
+
+.text-secondary {
+  color: #718096;
+  /* A medium gray */
+}
+
+.text-tertiary {
+  color: #a0aec0;
+  /* A light gray */
+}
+
+/* Flex container */
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+/* Flex direction */
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
+/* Flex wrap */
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+/* Justify content */
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+/* Align items */
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-baseline {
+  align-items: baseline;
+}
+
+.items-stretch {
+  align-items: stretch;
+}
+
+/* Grid container */
+.grid {
+  display: grid;
+}
+
+/* Grid columns */
+@each $i in 1 through 12 {
+  .grid-cols-#{$i} {
+    grid-template-columns: repeat(#{$i}, 1fr);
+  }
+}
+
+
+/* Grid gap */
+@each $i in 0 through 4 {
+  .gap-#{$i} {
+    gap: #{$i}rem;
+  }
+}
+
+/* Responsive grid */
+@media (min-width: 640px) {
+  @each $i in 1 through 12 {
+    .sm\:grid-cols-#{$i} {
+      grid-template-columns: repeat(#{$i}, 1fr);
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  @each $i in 1 through 12 {
+    .md\:grid-cols-#{$i} {
+      grid-template-columns: repeat(#{$i}, 1fr);
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  @each $i in 1 through 12 {
+    .lg\:grid-cols-#{$i} {
+      grid-template-columns: repeat(#{$i}, 1fr);
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  @each $i in 1 through 12 {
+    .xl\:grid-cols-#{$i} {
+      grid-template-columns: repeat(#{$i}, 1fr);
+    }
+  }
+}
+
+/* Margin */
+@each $i in 0 through 5 {
+  .m-#{$i} {
+    margin: #{$i}rem;
+  }
+}
+
+/* Margin Top */
+@each $i in 0 through 5 {
+  .mt-#{$i} {
+    margin-top: #{$i}rem;
+  }
+}
+
+/* Margin Right */
+@each $i in 0 through 5 {
+  .mr-#{$i} {
+    margin-right: #{$i}rem;
+  }
+}
+
+/* Margin Bottom */
+@each $i in 0 through 5 {
+  .mb-#{$i} {
+    margin-bottom: #{$i}rem;
+  }
+}
+
+/* Margin Left */
+@each $i in 0 through 5 {
+  .ml-#{$i} {
+    margin-left: #{$i}rem;
+  }
+}
+
+/* Padding */
+@each $i in 0 through 5 {
+  .p-#{$i} {
+    padding: #{$i}rem;
+  }
+}
+
+/* Padding Top */
+@each $i in 0 through 5 {
+  .pt-#{$i} {
+    padding-top: #{$i}rem;
+  }
+}
+
+/* Padding Right */
+@each $i in 0 through 5 {
+  .pr-#{$i} {
+    padding-right: #{$i}rem;
+  }
+}
+
+/* Padding Bottom */
+@each $i in 0 through 5 {
+  .pb-#{$i} {
+    padding-bottom: #{$i}rem;
+  }
+}
+
+/* Padding Left */
+@each $i in 0 through 5 {
+  .pl-#{$i} {
+    padding-left: #{$i}rem;
+  }
+}
+
+
+
+@each $color-name, $color-value in $colors {
+  .text-#{$color-name} {
+    color: $color-value;
+  }
+
+  .bg-#{$color-name} {
+    background-color: $color-value;
+  }
+}
+
+@each $space-name, $space-value in $spaces {
+  .m-#{$space-name} {
+    margin: #{$space-value}rem;
+  }
+
+  .p-#{$space-name} {
+    padding: #{$space-value}rem;
+  }
+}
+
+@each $breakpoint, $query in $breakpoints {
+  @media #{$query} {
+    @each $space-name, $space-value in $spaces {
+      .#{$breakpoint}\:m-#{$space-name} {
+        margin: #{$space-value}rem;
+      }
+
+      .#{$breakpoint}\:p-#{$space-name} {
+        padding: #{$space-value}rem;
+      }
+    }
+  }
+}
+
+@each $text-size-name, $text-size-value in $text-sizes {
+  .text-#{$text-size-name} {
+    font-size: $text-size-value;
+  }
+}
+
+@each $breakpoint, $query in $breakpoints {
+  @media #{$query} {
+    @each $text-size-name, $text-size-value in $text-sizes {
+      .#{$breakpoint}\:text-#{$text-size-name} {
+        font-size: $text-size-value;
+      }
+    }
+  }
+}
+
+@each $border-name, $border-value in $borders {
+  .border-#{$border-name} {
+    border-width: $border-value;
+  }
+}
+
+@each $style-name, $style-value in $border-styles {
+  .border-#{$style-name} {
+    border-style: $style-value;
+  }
+}
+
+@each $color-name, $color-value in $border-colors {
+  .border-#{$color-name} {
+    border-color: $color-value;
+  }
+}
+
+@each $color-name, $color-value in $button-colors {
+  .btn-#{$color-name} {
+    background-color: $color-value;
+    color: $primary-color;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+
+    &:hover {
+      background-color: darken($color-value, 10%);
+    }
+
+    &:active {
+      background-color: darken($color-value, 20%);
+    }
+
+    &:focus,
+    &:active:focus {
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba($color-value, 0.5);
+    }
+  }
+}
+
+@each $width-name, $width-value in $widths {
+  .w-#{$width-name} {
+    width: $width-value;
+  }
+}
+
+@each $height-name, $height-value in $heights {
+  .h-#{$height-name} {
+    height: $height-value;
+  }
+}
+
+@each $rounded-name, $rounded-value in $rounded {
+  .rounded-#{$rounded-name} {
+    border-radius: $rounded-value;
+  }
+}
+
+@each $ratio-name, $ratio-value in $aspect-ratios {
+  .aspect-ratio-#{$ratio-name} {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: $ratio-value;
+    overflow: hidden;
+
+    &>* {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@each $shadow-name, $shadow-value in $shadows {
+  .shadow-#{$shadow-name} {
+    box-shadow: $shadow-value;
+  }
+}

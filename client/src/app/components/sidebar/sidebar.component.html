@@ -1,0 +1,48 @@
+<div
+  class="sidebar__overlay pof fixed-full bg-overlay"
+  [ngClass]="isOpen ? 'active' : ''"
+  (click)="closeSidebar()"
+>
+  <div
+    class="sidebar__inner pof top-0 left-0 bottom-0 right-three-quarters bg-white shadow-sm"
+  >
+    <div class="sidebar__header flex justify-between items-center">
+      <div class="sidebar__header__logo">
+        <a href="/">
+          <img src="assets/images/Shoesx.svg" alt="logo" />
+        </a>
+      </div>
+      <button class="p-1 rounded-full" (click)="closeSidebar()">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+    <div class="sidebar__menu mt-3">
+      <ul>
+        <li>
+          <a routerLink="/Home" routerLinkActive="active">
+            <i class="pi pi-home"></i>
+            Home
+          </a>
+        </li>
+        <li>
+          <a routerLink="/shop" routerLinkActive="active">
+            <i class="pi pi-shopping-bag"></i>
+            Shop
+          </a>
+        </li>
+        <li>
+          <a routerLink="/singup" routerLinkActive="active">
+            <i class="pi pi-user-plus pr-1"></i>
+            Sign up
+          </a>
+        </li>
+        <li>
+          <a routerLink="/login" routerLinkActive="active">
+            <i class="pi pi-user"></i>
+            Login
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

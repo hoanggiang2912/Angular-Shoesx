@@ -1,0 +1,35 @@
+@import "../../../styles/_variables.scss";
+
+.header {
+  padding: 3rem 19rem;
+
+  .header__inner {
+    ul {
+      li {
+        a {
+          display: block;
+          position: relative;
+
+          &::before {
+            position: absolute;
+            bottom: -2px;
+            content: "";
+            display: block;
+            width: 0;
+            height: 2px;
+            background-color: $primary-color;
+            transition: width 0.3s;
+          }
+
+          &:hover {
+            color: lighten($color: $primary-color, $amount: 10%);
+          }
+
+          &:hover::before {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
