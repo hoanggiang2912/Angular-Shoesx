@@ -1,1 +1,94 @@
-<p>product-detail works!</p>
+<app-section>
+  <div class="grid">
+    <div class="row">
+      <div class="col l-6 m-6 c-12">
+        <div class="gallery" style="width: 100%; height: 600px">
+          <p-galleria
+            [(ngModel)]="product.thumbnails"
+            thumbnailsPosition="left"
+            [responsiveOptions]="responsiveOptions"
+            [containerStyle]="{ 'max-width': '640px' }"
+            [numVisible]="5"
+          >
+            <ng-template pTemplate="item" let-item>
+              <img
+                [src]="item"
+                style="width: 100%; min-height: 420px; display: block"
+              />
+            </ng-template>
+            <ng-template pTemplate="thumbnail" let-item>
+              <div class="grid grid-nogutter justify-content-center">
+                <img [src]="item" />
+              </div>
+            </ng-template>
+          </p-galleria>
+        </div>
+      </div>
+      <div class="col l-6 m-6 c-12">
+        <div class="product-detail">
+          <h1 class="text-5xl fw-semi-bold">{{ product.title }}</h1>
+          <h4 class="text-2xl fw-semi-bold mt-2">
+            {{ product.idCategory.children }}
+          </h4>
+          <div class="variants">
+            <div class="variant" *ngFor="let variant of product.variants">
+              <!-- <div class="variant__color" [style.background]="variant.color">
+                <img [src]="variant.image" />
+              </div> -->
+            </div>
+          </div>
+          <div class="product-detail__price">
+            @if (product.salePrice) {
+            <del class="product-detail__price--sale">
+              {{ product.price | currency }}
+            </del>
+            <span class="product-detail__price--discount">
+              {{ (product.price * product.salePrice) / 100 | currency }}
+            </span>
+            } @else {
+            <div class="mt-2 leading-3 text-3xl">
+              {{ product.price | currency : "VND" }}
+            </div>
+            }
+          </div>
+          <div class="product-detail__quantity flex items-center">
+            <button class="icon-btn medium rounded-full" (click)="descrease()">
+              <i class="pi pi-minus"></i>
+            </button>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              [value]="value"
+              min="1"
+              [max]="product.qty"
+              class="input text-primary"
+              style="
+                width: 50px;
+                height: 50px;
+                text-align: center;
+                font-size: 1.5rem;
+                border: none;
+              "
+            />
+            <button class="icon-btn medium rounded-full" (click)="increase()">
+              <i class="pi pi-plus"></i>
+            </button>
+          </div>
+          <div class="product-detail__button">
+            <button
+              class="btn btn-primary text-white p-2"
+              (click)="addToCart(product, 1)"
+            >
+              Add to cart
+            </button>
+          </div>
+
+          <div class="product-detail__description leading-5 text-3xl">
+            {{ product.description }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-section>

@@ -1,0 +1,12 @@
+<section class="section">
+  <div class="section__title">
+    @if (sectionTitle) {
+    <h1 class="title uppercase">{{ sectionTitle }}</h1>
+    } @if (sectionSubTitle) {
+    <p class="subtitle primary-text text-xl tac">{{ sectionSubTitle }}</p>
+    }
+  </div>
+  <div class="section__content">
+    <ng-content></ng-content>
+  </div>
+</section>

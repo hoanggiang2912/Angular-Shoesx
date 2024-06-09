@@ -49,7 +49,7 @@ router.post("/refresh", (req, res) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    const users = await Users.find();
+    const users = await Users.find().sort({ date: -1 });
     res.json(users);
   } catch (error) {
     res.json({ message: error });
@@ -66,6 +66,8 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post("/register", async (req, res, next) => {
+  console.log(req.body);
+
   // Validate
   const { error } = registerValidator(req.body);
   if (error) {
@@ -86,6 +88,7 @@ router.post("/register", async (req, res, next) => {
     password: hashedPassword,
     email: req.body.email,
     phone: req.body.phone,
+    name: req.body.name,
   });
 
   try {
@@ -119,9 +122,9 @@ router.post("/create", async (req, res, next) => {
     email: req.body.email,
     phone: req.body.phone,
     role: req.body.role,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
+    name: req.body.name,
     note: req.body.note,
+    status: req.body.status,
   });
 
   try {
@@ -165,26 +168,32 @@ router.post("/login", async (req, res) => {
 router.patch("/update-profile/:idUser", async (req, res) => {
   try {
     const idUser = req.params.idUser;
-    await UsersModel.updateOne(
-      {
-        _id: idUser,
-      },
-      {
-        $set: {
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          addresses: [
-            {
-              address: req.body.address,
-              addressDetail: req.body.addressDetail,
-            },
-          ],
-        },
-      }
-    );
-    const updatedUser = await UsersModel.findById(idUser);
 
-    res.status(200).json({ updatedUser, success: true });
+    const email = req.body.email;
+    const user = await UsersModel.findOne({
+      email: email,
+      _id: { $ne: idUser },
+    });
+
+    if (user) {
+      return res.status(400).json({ message: "Email already exists" });
+    } else {
+      await UsersModel.updateOne(
+        {
+          _id: idUser,
+        },
+        {
+          $set: {
+            name: req.body.name,
+            phone: req.body.phone,
+            email: req.body.email,
+          },
+        }
+      );
+      const updatedUser = await UsersModel.findById(idUser);
+
+      res.status(200).json({ updatedUser, success: true });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -206,11 +215,8 @@ router.patch("/update-user-admin/:idUser", async (req, res) => {
       {
         $set: {
           role: req.body.role,
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          email: req.body.email,
-          phone: req.body.phone,
           note: req.body.note,
+          status: req.body.status,
         },
       }
     );
@@ -232,6 +238,26 @@ router.patch("/update-password/:idUser", async (req, res) => {
     res.json({ user, success: true });
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+});
+
+router.post("/check-email", async (req, res) => {
+  const email = req.body.email;
+  const id = req.body.id;
+
+  try {
+    const user = await UsersModel.findOne({
+      email: email,
+      _id: { $ne: id },
+    });
+
+    if (user) {
+      res.json({ success: true, message: "True email" });
+    } else {
+      res.json({ success: false, message: "False email" });
+    }
+  } catch (err) {
+    res.json({ message: err });
   }
 });
 

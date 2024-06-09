@@ -1,14 +1,70 @@
-@import "../../../styles/_variables.scss";
+@import "../../../styles/variables";
+@import "../../../styles/keyframes";
 
 .header {
-  padding: 3rem 19rem;
+  padding: clamp(1.6rem, 0.6rem + 2.667vw, 3rem) clamp(1.2rem, -11.514rem + 33.905vw, 19rem);
+  animation: slideTopIn 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+
+  &.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: $white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeInDown 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  }
 
   .header__inner {
-    ul {
+    .user-widget {
+      top: 110%;
+      right: 0;
+      background: white;
+      padding: 2rem;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      border-radius: 12px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease-in-out;
+      z-index: 100;
+
+      &.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        li {
+          display: block;
+          width: 100%;
+          border-radius: 6px;
+          transition: all 0.25s linear;
+
+          &:hover {
+            background: #ccc;
+          }
+
+          a {
+            padding: 0.5rem 1rem;
+            display: block;
+            cursor: pointer;
+            width: max-content;
+          }
+        }
+      }
+    }
+
+    .guess-widget {
       li {
         a {
           display: block;
           position: relative;
+          width: max-content;
 
           &::before {
             position: absolute;
@@ -29,6 +85,14 @@
             width: 100%;
           }
         }
+      }
+    }
+
+    .cart-btn {
+      .cart-count {
+        background: rgb(255, 90, 136);
+        color: $white;
+        transition: all 0.3s linear;
       }
     }
   }

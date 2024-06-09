@@ -1,0 +1,89 @@
+<div
+  class="search-box--overlay bg-overlay fixed-full flex flex-center por"
+  [ngClass]="isOpen ? 'active' : ''"
+>
+  <div class="search-box--close flex flex-center poa top-20 right-20">
+    <button class="icon-btn medium text-white" (click)="closeSearchBox()">
+      <i class="pi pi-times"></i>
+    </button>
+  </div>
+  <div class="search-box--inner w-fit">
+    <form action="#" class="search--form flex items-center">
+      <button class="icon-btn large">
+        <i class="pi pi-search"></i>
+      </button>
+      <input
+        type="text"
+        placeholder="Search (keywords, etc)"
+        class="input"
+        (input)="searchTerm.next($event)"
+      />
+    </form>
+
+    <div class="suggestions">
+      <h2 class="uppercase text-3xl fw-bold text-white mb-3">suggestions</h2>
+
+      <ul class="suggestion-list flex items-center gap-2">
+        <li>
+          <a
+            href=""
+            class="suggestion-item rounded-full bg-overlay p-1 text-white"
+            >Suggestion 1</a
+          >
+        </li>
+        <li>
+          <a
+            href=""
+            class="suggestion-item rounded-full bg-overlay p-1 text-white"
+            >Suggestion 2</a
+          >
+        </li>
+        <li>
+          <a
+            href=""
+            class="suggestion-item rounded-full bg-overlay p-1 text-white"
+            >Suggestion 3</a
+          >
+        </li>
+        <li>
+          <a
+            href=""
+            class="suggestion-item rounded-full bg-overlay p-1 text-white"
+            >Suggestion 4</a
+          >
+        </li>
+        <li>
+          <a
+            href=""
+            class="suggestion-item rounded-full bg-overlay p-1 text-white"
+            >Suggestion 5</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div class="results mt-5 text-white">
+      @if (searchProducts.length > 0){
+      <div class="flex justify-between items-center">
+        <h2 class="uppercase text-3xl fw-bold text-white mb-3">Results</h2>
+        <a routerLink="#" class="text-white underline">See more</a>
+      </div>
+      }
+
+      <swiper-container
+        slides-per-view="3"
+        speed="500"
+        loop="false"
+        space-between="20"
+        class="product-swiper"
+        width="1000"
+      >
+        @for (product of searchProducts; track product._id) {
+        <swiper-slide>
+          <app-product [product]="product"></app-product>
+        </swiper-slide>
+        }
+      </swiper-container>
+    </div>
+  </div>
+</div>

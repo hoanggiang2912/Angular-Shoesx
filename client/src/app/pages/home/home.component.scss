@@ -1,0 +1,57 @@
+@import "../../../styles/_variables.scss";
+
+.animate-tab-change {
+  animation: fadeIn 600ms;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.override-tabView {
+  .p-tabview-nav-content {
+    .p-tabview-nav {
+      background: none !important;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 3rem;
+
+      .p-highlight {
+        background: $white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+        border-radius: 100rem;
+        color: $primary-color;
+        transform: scale(1.01);
+      }
+
+      .p-element.p-ripple.p-tabview-nav-link {
+        border: none !important;
+        color: $primary-color;
+        font-size: 1.6rem;
+        padding: 1.2rem 1.6rem;
+        border-radius: 100rem;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+          background: $white;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+          transform: scale(1.01);
+        }
+      }
+    }
+  }
+}
+
+.p-tabview-panels {
+  background: none !important;
+}

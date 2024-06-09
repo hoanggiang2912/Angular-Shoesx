@@ -1,0 +1,64 @@
+<div class="cart__product p-2 flex">
+  <div class="flex gap-2 flex-1" style="gap: 8px">
+    <div
+      class="cart__product__image oh rounded-md"
+      style="width: 80px; height: 80px; flex-shrink: 0"
+    >
+      <img [src]="product.background" [alt]="product.title" />
+    </div>
+    <div class="cart__product__details flex flex-col justify-between">
+      <h3 class="text-2xl fw-semi-bold">{{ product.title }}</h3>
+      @if (product.salePrice) {
+      <p class="text-xl">
+        {{
+          product.price - (product.salePrice * product.price) / 100
+            | currency : "VND"
+        }}
+      </p>
+      <del class="text-xl"
+        ><i>{{ product.price | currency : "VND" }}</i></del
+      >
+      } @else {
+      <p class="text-xl">{{ product.price | currency : "VND" }}</p>
+      }
+      <form
+        action="#"
+        class="qty__controller flex items-center"
+        (submit)="$event.preventDefault()"
+      >
+        <button class="btn-transparent icon-btn" (click)="decreaseQty(product)">
+          <i class="pi pi-minus"></i>
+        </button>
+        <input
+          type="number"
+          name="quantity"
+          id="quantity"
+          class="input border rounded-md w-12 text-center"
+          [value]="product.qty"
+        />
+        <button class="btn-transparent icon-btn" (click)="increaseQty(product)">
+          <i class="pi pi-plus"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="cart__product__actions flex flex-col justify-between items-end">
+    <button
+      class="btn-transparent icon-btn medium"
+      (click)="removeFromCart(product)"
+    >
+      <i class="pi pi-trash"></i>
+    </button>
+
+    @if (product.salePrice) {
+    <p class="text-2xl">
+      {{
+        ((product.salePrice * product.price) / 100) * product.qty
+          | currency : "VND"
+      }}
+    </p>
+    } @else {
+    <p class="text-2xl">{{ product.price * product.qty | currency : "VND" }}</p>
+    }
+  </div>
+</div>

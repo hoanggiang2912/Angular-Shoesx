@@ -1,0 +1,16 @@
+.dlabnav {
+  padding: 20px;
+  background: #fff;
+  border-right: 1px solid #e5e5e5;
+  position: fixed;
+  border-radius: 8px;
+  min-width: 300px;
+  bottom: 0;
+  top: 70px;
+}
+
+.nav-item {
+  &:hover {
+    background: #e5e5e5;
+  }
+}

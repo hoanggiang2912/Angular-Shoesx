@@ -1,0 +1,103 @@
+@if (isLoading) {
+<app-loader></app-loader>
+}
+
+<app-section>
+  <div class="grid layout">
+    <div class="row">
+      <div class="col l-4 m-4 c-0">
+        <app-user-sidebar [user]="user"></app-user-sidebar>
+      </div>
+      <div class="col l-8 m-8 c-12">
+        <form
+          [formGroup]="userFormGroup"
+          class="border-1 border-solid border-gray rounded-xl col__inner grid"
+        >
+          <h1 class="text-center text-2xl fw-bold p-2">User Profile</h1>
+          <div class="row p-2" style="padding-top: 0">
+            <div class="form__group col l-6 m-6 c-12">
+              <label for="name" class="form__label">Name</label>
+              <input
+                type="text"
+                class="form__input mt-1"
+                placeholder="Name"
+                formControlName="name"
+              />
+
+              @if (userFormGroup.controls['name'].invalid &&
+              (userFormGroup.controls['name'].dirty ||
+              userFormGroup.controls['name'].touched)) {
+              <div class="form__message text-danger text-xl">
+                @if (userFormGroup.controls['name'].errors?.['required']) {
+                <span>Please enter your name</span>
+                }
+              </div>
+              }
+            </div>
+
+            <div class="form__group col l-6 m-6 c-12">
+              <label for="name" class="form__label">Email</label>
+              <input
+                type="text"
+                class="form__input mt-1"
+                placeholder="Email"
+                formControlName="email"
+              />
+
+              @if (userFormGroup.controls['email'].invalid &&
+              (userFormGroup.controls['email'].dirty ||
+              userFormGroup.controls['email'].touched)) {
+              <div class="form__message text-danger text-xl">
+                @if (userFormGroup.controls['email'].errors?.['required']) {
+                <span>Email is required</span>
+                } @else if (userFormGroup.controls['email'].errors?.['email']) {
+                <span>Email is invalid</span>
+                }
+              </div>
+              }
+            </div>
+
+            <div class="form__group col l-6 m-6 c-12">
+              <label for="name" class="form__label">Phone</label>
+              <input
+                type="text"
+                class="form__input mt-1"
+                placeholder="Phone"
+                formControlName="phone"
+              />
+              @if (userFormGroup.controls['phone'].invalid &&
+              (userFormGroup.controls['phone'].dirty ||
+              userFormGroup.controls['phone'].touched)) {
+              <div class="form__message text-danger text-xl">
+                @if (userFormGroup.controls['phone'].errors?.['required']) {
+                <span>Phone is required</span>
+                } @else if (userFormGroup.controls['phone'].errors?.['pattern'])
+                {
+                <span>Phone is invalid</span>
+                }
+              </div>
+              }
+            </div>
+
+            <div class="form__group col l-12 m-12 c-12">
+              <div class="flex w-full justify-end items-center">
+                <button
+                  class="btn btn-danger medium text-white rounded-full mr-2"
+                  (click)="onDiscard()"
+                >
+                  Discard
+                </button>
+                <button
+                  class="btn btn-primary medium text-white rounded-full"
+                  (click)="onSave()"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</app-section>

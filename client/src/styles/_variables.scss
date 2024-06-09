@@ -1,10 +1,27 @@
 $black: #000;
 $white: #fff;
 $border-color: #DCDCDC;
+$bg-light: #efefef;
 $primary-color: #000220;
+$pending-color: #FFA500;
+$success-color: #008000;
+$danger-color: #FF0000;
+$delivering-color: #0000FF;
+$delivered-color: #008000;
+$warning-color: #FFD700;
+$info-color: #00BFFF;
 $red: #E14646;
 $green: #B3E140;
 $purple: #6F77F2;
+$overlay: rgba(0, 0, 0, 0.5);
+$overlay-light: rgba(255, 255, 255, 0.5);
+$shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 8px 16px rgba(0, 0, 0, 0.1);
+$shadow-2xl: 0 12px 24px rgba(0, 0, 0, 0.1);
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+$shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 
 /* Colors */
 $colors: (
@@ -18,6 +35,18 @@ $colors: (
   "dark": #343a40,
   "white": #ffffff,
   "black": #000000,
+  "transparent": transparent,
+  "inherit": inherit,
+  "black-50": rgba(0, 0, 0, 0.5),
+  "black-10": rgba(0, 0, 0, 0.1),
+  "black-20": rgba(0, 0, 0, 0.2),
+  "black-30": rgba(0, 0, 0, 0.3),
+  "black-40": rgba(0, 0, 0, 0.4),
+  "black-60": rgba(0, 0, 0, 0.6),
+  "black-70": rgba(0, 0, 0, 0.7),
+  "black-80": rgba(0, 0, 0, 0.8),
+  "black-90": rgba(0, 0, 0, 0.9),
+  "white-50": rgba(255, 255, 255, 0.5),
   "overlay": rgba(0, 0, 0, 0.5),
 );
 
@@ -41,6 +70,18 @@ $breakpoints: (
   'xl': '(min-width: 1280px)'
 );
 
+$font-weights: (
+  "thin": 100,
+  "extra-light": 200,
+  "light": 300,
+  "regular": 400,
+  "medium": 500,
+  "semi-bold": 600,
+  "bold": 700,
+  "extra-bold": 800,
+  "black": 900
+);
+
 /** Text sizes */
 $text-sizes: (
   "xs": 0.75rem,
@@ -53,8 +94,8 @@ $text-sizes: (
   // 11.25px
   "xl": 1.25rem,
   // 12.5px
-  "2xl": 1.5rem,
-  // 15px
+  "2xl": 1.6rem,
+  // 16px
   "3xl": 1.875rem,
   // 18.75px
   "4xl": 2.25rem,
@@ -100,6 +141,26 @@ $button-colors: (
   "info": #17a2b8,
   "light": #f8f9fa,
   "dark": #343a40,
+  "white": #ffffff,
+  "black": #000000,
+  "black-50": rgba(0, 0, 0, 0.5),
+  "black-10": rgba(0, 0, 0, 0.1),
+  "black-20": rgba(0, 0, 0, 0.2),
+  "black-30": rgba(0, 0, 0, 0.3),
+  "black-40": rgba(0, 0, 0, 0.4),
+  "black-60": rgba(0, 0, 0, 0.6),
+  "black-70": rgba(0, 0, 0, 0.7),
+  "black-80": rgba(0, 0, 0, 0.8),
+  "black-90": rgba(0, 0, 0, 0.9),
+  "white-10": rgba(255, 255, 255, 0.1),
+  "white-20": rgba(255, 255, 255, 0.2),
+  "white-30": rgba(255, 255, 255, 0.3),
+  "white-40": rgba(255, 255, 255, 0.4),
+  "white-50": rgba(255, 255, 255, 0.5),
+  "white-60": rgba(255, 255, 255, 0.6),
+  "white-70": rgba(255, 255, 255, 0.7),
+  "white-90": rgba(255, 255, 255, 0.9),
+  "white-80": rgba(255, 255, 255, 0.8),
   "transparent": transparent
 );
 
@@ -108,7 +169,8 @@ $widths: (
   "quarter": 25%,
   "half": 50%,
   "three-quarters": 75%,
-  "full": 100%
+  "full": 100%,
+  "fit": fit-content,
 );
 
 $heights: (
@@ -172,3 +234,14 @@ $shadows: (
   "xl": 0 8px 16px rgba(0, 0, 0, 0.1),
   "2xl": 0 12px 24px rgba(0, 0, 0, 0.1)
 );
+
+$properties: (
+  "opacity": opacity,
+  "transform": transform,
+  "background-color": background-color,
+  "color": color,
+  "margin": margin,
+  "padding": padding
+);
+$durations: 100ms, 200ms, 300ms, 400ms, 500ms;
+$timing-functions: ease, ease-in, ease-out, ease-in-out, linear, step-start, step-end;

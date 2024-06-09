@@ -1,0 +1,25 @@
+<div class="user-sidebar border-1 border-gray border-solid rounded-xl">
+  <nav>
+    <ul>
+      @for (item of sidebarOptions; track $index) {
+      <li
+        class="sidebar-item w-full"
+        [ngClass]="
+          item.type && item.type === 'danger' ? 'text-danger' : 'text-primary'
+        "
+        (click)="item.handler && item.handler()"
+      >
+        <a
+          class="text-2xl p-2 flex items-center gap-1"
+          [routerLink]="[item.route && item.route, user ? user._id : '']"
+          routerLinkActive="active"
+          ><div class="icon">
+            <i [class]="item.icon"></i>
+          </div>
+          <span>{{ item.name }}</span></a
+        >
+      </li>
+      }
+    </ul>
+  </nav>
+</div>

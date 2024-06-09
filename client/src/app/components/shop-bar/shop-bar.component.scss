@@ -1,0 +1,17 @@
+.shop-title {
+  font-size: 5rem;
+  font-family: "FS PF BeauSans Pro";
+  font-weight: 900;
+}
+
+.override-p-dropdown {
+  .p-dropdown {
+    background: none;
+    border: none;
+    padding: .8rem 1.2rem;
+
+    .p-ripple.p-element.p-dropdown-item {
+      padding: .6rem 1rem;
+    }
+  }
+}

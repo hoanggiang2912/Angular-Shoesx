@@ -1,0 +1,25 @@
+@import "../../../styles/_variables.scss";
+
+.footer {
+  border-top: 1px solid $border-color;
+  padding: clamp(3rem, 0.857rem + 5.714vw, 6rem) clamp(1.2rem, -11.514rem + 33.905vw, 19rem);
+
+  .col {
+    margin: 0;
+
+    h4 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1.6rem;
+    }
+
+    a {
+      display: block;
+      margin-bottom: 1.4rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

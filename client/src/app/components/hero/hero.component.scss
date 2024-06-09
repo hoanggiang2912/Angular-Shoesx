@@ -1,0 +1,17 @@
+@import "../../../styles/_variables.scss";
+
+.hero__text {
+  color: $primary-color;
+  font-family: "FS PF BeauSans Pro";
+  font-size: clamp(3rem, -4.857rem + 20.952vw, 14rem);
+  font-style: normal;
+  font-weight: 900;
+  line-height: 110%;
+  /* 12.9952rem */
+}
+
+.hero__section--product {
+  display: flex;
+  gap: 1%;
+  min-height: 600px;
+}

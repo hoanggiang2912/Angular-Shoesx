@@ -1,0 +1,19 @@
+@import "../../../styles/_variables.scss";
+
+.comment {
+  transition: .2s cubic-bezier(0.215, 0.610, 0.355, 1);
+
+  &:hover {
+    background: $white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .comment--text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+  }
+}

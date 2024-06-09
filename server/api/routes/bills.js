@@ -6,6 +6,8 @@ const BillsController = require("../controllers/BillsController");
 
 const { json } = require("body-parser");
 const verify = require("./verifyToken.js");
+const ProductsModel = require("../models/ProductsModel.js");
+const ProductsController = require("../controllers/ProductsController.js");
 
 /** /api/v1/bills */
 
@@ -29,6 +31,15 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+router.get("/user/:id", async (req, res, next) => {
+  try {
+    const bills = await BillsController.getByUserId(req.params.id);
+    res.json(bills);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
 router.post("/", async (req, res, next) => {
   const bill = new BillsModel({
     idUser: req.body.idUser,
@@ -41,11 +52,35 @@ router.post("/", async (req, res, next) => {
     paymentMethod: req.body.paymentMethod,
     status: req.body.status,
     address: req.body.address,
+    note: req.body.note,
+    addressDetail: req.body.addressDetail,
     phone: req.body.phone,
     email: req.body.email,
   });
 
   try {
+    // update product qty
+    // for (let i = 0; i < bill.products.length; i++) {
+    //   const product = bill.products[i];
+    //   const productId = product.idProduct;
+
+    //   const productData = await ProductsController.getById(productId);
+    //   console.log(productData);
+    //   console.log(productData.products);
+
+    //   if (productData.qty < product.qty) {
+    //     return res.json({ message: "Product out of stock" });
+    //   } else {
+    //     const qty = productData.qty - product.qty;
+    //     const updatedProduct = await ProductsController.updateQty(
+    //       productId,
+    //       qty
+    //     );
+
+    //     console.log(updatedProduct);
+    //   }
+    // }
+
     const savedBill = await bill.save();
     res.json(savedBill);
   } catch (error) {
@@ -96,7 +131,8 @@ router.patch("/update-status/:id", async (req, res) => {
       { _id: req.params.id },
       {
         $set: {
-          status: req.body.status,
+          deliveryStatus: req.body.deliveryStatus,
+          paymentStatus: req.body.paymentStatus,
         },
       }
     );
@@ -105,6 +141,33 @@ router.patch("/update-status/:id", async (req, res) => {
   } catch (error) {
     console.error("Error updating bill status:", error);
     res.json({ errorMessage: "Error updating bill status" });
+  }
+});
+
+router.patch("/cancel/:id", async (req, res) => {
+  console.log("Cancelling bill with id:", req.params.id);
+
+  try {
+    const bill = await BillsModel.findById(req.params.id);
+
+    if (bill.deliveryStatus === "pending") {
+      const updatedBill = await BillsModel.updateOne(
+        { _id: req.params.id },
+        {
+          $set: {
+            deliveryStatus: "canceled",
+            paymentStatus: "canceled",
+          },
+        }
+      );
+
+      res.json({ updatedBill, success: true });
+    } else {
+      res.json({ errorMessage: "Can't cancel bill that is being processed" });
+    }
+  } catch (error) {
+    console.error("Error cancelling bill:", error);
+    res.json({ errorMessage: error });
   }
 });
 

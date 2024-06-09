@@ -6,11 +6,25 @@ const ProductsController = require("../controllers/ProductsController");
 const { json } = require("body-parser");
 const { verify } = require("./verifyToken.js");
 
+// api/v1/products
+
 // get all products
 router.get("/", async (req, res, next) => {
   try {
     const queries = req.query;
-    const products = await ProductsController.getAll(queries);
+    const data = await ProductsController.getAll(queries);
+    res.json(data);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+});
+
+router.get("/multi-category", async (req, res) => {
+  try {
+    const products = await ProductsController.getAllByMultiParent(
+      req.query.parents,
+      req.query.limit
+    );
     res.json(products);
   } catch (error) {
     res.json({ message: error.message });
@@ -27,9 +41,12 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.get("/category/:idCategory", async (req, res, next) => {
+router.get("/category/:parent/:children", async (req, res, next) => {
   try {
-    const idCategory = req.params.idCategory;
+    const idCategory = {
+      parent: req.params.parent,
+      children: req.params.children,
+    };
     const product = await ProductsController.getByIdCategory(idCategory);
     res.json(product);
   } catch (error) {
@@ -65,6 +82,7 @@ router.post("/", async (req, res, next) => {
     size: req.body.size,
     qty: req.body.qty,
     variants: req.body.variants,
+    status: req.body.status,
   });
 
   try {
@@ -76,7 +94,7 @@ router.post("/", async (req, res, next) => {
 });
 
 // delete a specific product
-router.delete("/:id", verify, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   console.log("Deleting product with id:", req.params.id);
   try {
     const removedProduct = await ProductsModel.deleteOne({
@@ -90,7 +108,7 @@ router.delete("/:id", verify, async (req, res) => {
 });
 
 // update a product
-router.patch("/:id", verify, async (req, res, next) => {
+router.patch("/:id", async (req, res, next) => {
   console.log("Updating product with id:", req.params.id);
   try {
     const updatedProduct = await ProductsModel.updateOne(
@@ -103,6 +121,11 @@ router.patch("/:id", verify, async (req, res, next) => {
           description: req.body.description,
           qty: req.body.qty,
           idCategory: req.body.idCategory,
+          background: req.body.background,
+          thumbnails: req.body.thumbnails,
+          size: req.body.size,
+          variants: req.body.variants,
+          status: req.body.status,
         },
       }
     );
@@ -130,6 +153,58 @@ router.patch("/:id/views", verify, async (req, res) => {
     res.json(updatedProduct);
   } catch (error) {
     console.error("Error updating product views:", error);
+    res.json({ message: error });
+  }
+});
+
+router.patch("/return-qty/:id", async (req, res) => {
+  console.log("Updating product qty with id:", req.params.id);
+
+  try {
+    const currentProduct = await ProductsModel.findById(req.params.id);
+    if (!currentProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const newQty = currentProduct.qty + req.body.qty;
+
+    const updatedProduct = await ProductsModel.updateOne(
+      { _id: req.params.id },
+      {
+        $set: {
+          qty: newQty,
+        },
+      }
+    );
+
+    res.json(updatedProduct);
+  } catch (error) {
+    return res.status(404).json({ message: error });
+  }
+});
+
+router.patch("/update-qty/:id", async (req, res) => {
+  console.log("Updating product qty with id:", req.params.id);
+  try {
+    const currentProduct = await ProductsModel.findById(req.params.id);
+    if (!currentProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const newQty = currentProduct.qty - req.body.qty;
+
+    const updatedProduct = await ProductsModel.updateOne(
+      { _id: req.params.id },
+      {
+        $set: {
+          qty: newQty,
+        },
+      }
+    );
+
+    res.json(updatedProduct);
+  } catch (error) {
+    console.error("Error updating product qty:", error);
     res.json({ message: error });
   }
 });

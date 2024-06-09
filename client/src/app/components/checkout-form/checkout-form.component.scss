@@ -1,0 +1,83 @@
+@import "../../../styles/variables";
+
+
+.form {
+  border: 1px solid $border-color;
+  margin-bottom: 60px;
+}
+
+.form__group {
+  display: flex !important;
+}
+
+.form__input {
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.shipping-method {
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  padding: 10px;
+  transition: .2s cubic-bezier(0.23, 1, 0.320, 1);
+
+  &:hover {
+    border-color: $primary-color;
+  }
+}
+
+input[type="radio"] {
+  display: none;
+
+  &:checked+.custom-radio {
+    border-color: $primary-color;
+  }
+}
+
+.custom-radio {
+  border: 1px solid $border-color;
+  border-radius: 100rem;
+  padding: 4px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border: 8px solid transparent;
+  transition: .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.floating-checkout-box {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: $white;
+  padding: 10px 0;
+  text-align: center;
+  z-index: 1000;
+  padding: 20px 190px;
+
+  @media screen and (max-width: 768px) {
+    padding: 20px;
+  }
+
+  @media screen and (max-width: 576px) {
+    padding: 20px;
+  }
+
+  .checkout__summary__detail {
+    background: white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+}
+
+.payment-method {
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  padding: 10px;
+  transition: .2s cubic-bezier(0.23, 1, 0.320, 1);
+
+  &:hover {
+    border-color: $primary-color;
+  }
+}

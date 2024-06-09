@@ -10,10 +10,60 @@ const { verify } = require("./verifyToken.js");
 // get all categories
 router.get("/", async (req, res, next) => {
   try {
-    const categories = await CategoiesController.getAll();
+    const query = req.query;
+    const categories = await CategoiesController.getAll(query);
+    res.json(categories);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+});
+
+router.get("/category/:idCategory", async (req, res, next) => {
+  try {
+    const id = req.params.idCategory;
+    const category = await CategoiesController.getOne(id);
+    res.json(category);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+});
+
+router.get("/parent", async (req, res, next) => {
+  try {
+    const categories = await CategoiesController.getParentCategories();
+    res.json(categories);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+});
+
+router.get("/products", async (req, res, next) => {
+  try {
+    const query = req.query;
+    const categories = await CategoiesController.getCategoriesWithProducts(
+      query
+    );
+    res.json(categories);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+});
+
+router.get("/children", async (req, res, next) => {
+  try {
+    const categories = await CategoiesController.getChildrenCategories();
     res.json(categories);
   } catch (error) {
     res.json({ message: error });
+  }
+});
+
+router.get("/gender", async (req, res) => {
+  try {
+    const categories = await CategoiesController.getGenderCategories();
+    res.json(categories);
+  } catch (err) {
+    res.json({ message: err.message });
   }
 });
 
@@ -21,7 +71,7 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   const category = new CategoriesModel({
     name: req.body.name,
-    description: req.body.description,
+    categoryId: req.body.name,
   });
 
   try {
@@ -64,12 +114,6 @@ router.delete("/:id", async (req, res) => {
 
 // update a category
 router.patch("/:id", async (req, res, next) => {
-  // // Validate
-  // const { error } = registerValidator(req.body);
-  // if (error) {
-  //     return res.status(400).json({ message: error.details[0].message });
-  // }
-
   console.log("Updating category with id:", req.params.id);
   try {
     const updatedCategory = await CategoriesModel.updateOne(
@@ -77,7 +121,7 @@ router.patch("/:id", async (req, res, next) => {
       {
         $set: {
           name: req.body.name,
-          description: req.body.description,
+          categoryId: req.body.name,
         },
       }
     );

@@ -1,0 +1,133 @@
+<p-toast />
+
+<div class="content-body container admin-layout grid p-2">
+  <div class="container-fluid">
+    <form action="#" class="form grid" [formGroup]="formGroup">
+      <div class="row">
+        <div class="col l-8 m-6 c-12">
+          <div class="grapper p-4 rounded-lg shadow-sm bg-white grid">
+            <div class="row">
+              <div class="col l-12 m-12 c-12 form__group flex flex-col">
+                <label for="name">Name</label>
+                <input
+                  id="name"
+                  class="p-2"
+                  type="text"
+                  pInputText
+                  formControlName="title"
+                />
+              </div>
+              <div class="col l-6 m-6 c-12 form__group flex flex-col">
+                <label for="name">Category</label>
+                <select
+                  name="parent"
+                  [value]="formGroup.get('parent')?.value"
+                  formControlName="parent"
+                  class="select p-2"
+                >
+                  @for (category of categories; track $index) {
+                  @if(category.children.length > 0) {
+                  <option value="{{ category.name }}">
+                    {{ category.name }}
+                  </option>
+                  }}
+                </select>
+              </div>
+              <div class="col l-6 m-6 c-12 form__group flex flex-col">
+                <label for="name">Collection</label>
+                <select
+                  name="children"
+                  id=""
+                  formControlName="children"
+                  class="select p-2"
+                >
+                  @for (category of categories; track $index) {
+                  <option value="{{ category.name }}">
+                    {{ category.name }}
+                  </option>
+                  }
+                </select>
+              </div>
+              <div class="col l-6 m-6 c-12 form__group">
+                <label for="">Price</label>
+                <input
+                  type="number"
+                  formControlName="price"
+                  class="rounded-lg"
+                />
+              </div>
+              <div class="col l-6 m-6 c-12 form__group">
+                <label for="">Sale (%)</label>
+                <input
+                  type="number"
+                  formControlName="salePrice"
+                  class="rounded-lg"
+                />
+              </div>
+              <div class="col l-6 m-6 c-12 form__group">
+                <label for="">Quantity</label>
+                <input type="number" formControlName="qty" class="rounded-lg" />
+              </div>
+              <div class="col l-6 m-6 c-12 form__group">
+                <label for="">Status</label>
+                <select
+                  name="status"
+                  id=""
+                  class="select p-2"
+                  formControlName="status"
+                >
+                  <option value="show">Show</option>
+                  <option value="hide">Hide</option>
+                </select>
+              </div>
+              <div class="col l-12 m-12 c-12 form__group flex flex-col mt-2">
+                <label for="">Description</label>
+                <textarea
+                  rows="5"
+                  cols="30"
+                  pInputTextarea
+                  formControlName="description"
+                >
+                </textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col l-4 m-6 c-12">
+          <div class="p-4 rounded-lg shadow-sm bg-white grid">
+            <div class="row">
+              <div class="col l-12 m-12 c-12">
+                <div class="form__group">
+                  <label for="">Background URL: </label>
+                  <input type="text" pInputText formControlName="background" />
+                </div>
+                <div class="form__group">
+                  <label for="">Thumbnails URLs: </label>
+                  <textarea
+                    rows="5"
+                    cols="30"
+                    pInputTextarea
+                    formControlName="thumbnails"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="col l-12 m-12 c-12">
+                <div class="flex gap-2 justify-end">
+                  <button
+                    class="btn danger rounded-sm small"
+                    (click)="onCancel()"
+                  >
+                    Cancel
+                  </button>
+                  <button class="btn info rounded-sm small" (click)="onSave()">
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

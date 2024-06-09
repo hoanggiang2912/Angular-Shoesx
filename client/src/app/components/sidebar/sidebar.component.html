@@ -1,10 +1,11 @@
 <div
   class="sidebar__overlay pof fixed-full bg-overlay"
-  [ngClass]="isOpen ? 'active' : ''"
-  (click)="closeSidebar()"
+  [ngClass]="isOpen ? 'active fade-in' : ''"
+  (click)="closeSidebar(); $event.stopPropagation()"
 >
   <div
-    class="sidebar__inner pof top-0 left-0 bottom-0 right-three-quarters bg-white shadow-sm"
+    class="sidebar__inner pof top-0 left-0 bottom-0 bg-white shadow-sm"
+    (click)="$event.stopPropagation()"
   >
     <div class="sidebar__header flex justify-between items-center">
       <div class="sidebar__header__logo">
@@ -12,33 +13,78 @@
           <img src="assets/images/Shoesx.svg" alt="logo" />
         </a>
       </div>
-      <button class="p-1 rounded-full" (click)="closeSidebar()">
+      <button
+        class="p-1 rounded-full btn-transparent icon-btn medium"
+        (click)="closeSidebar()"
+      >
         <i class="pi pi-times"></i>
       </button>
     </div>
-    <div class="sidebar__menu mt-3">
+    <div class="sidebar__menu">
       <ul>
-        <li>
-          <a routerLink="/Home" routerLinkActive="active">
+        <li class="sidebar__menu__item">
+          <a
+            class="sidebar__menu__link"
+            (click)="openSearchBoxSidebar(); $event.stopPropagation()"
+            ><i class="pi pi-search"></i> Search</a
+          >
+        </li>
+        <li class="sidebar__menu__item">
+          <a
+            class="sidebar__menu__link"
+            routerLink="/"
+            routerLinkActive="active"
+          >
             <i class="pi pi-home"></i>
             Home
           </a>
         </li>
-        <li>
-          <a routerLink="/shop" routerLinkActive="active">
-            <i class="pi pi-shopping-bag"></i>
-            Shop
+        <li class="sidebar__menu__item">
+          <p-panelMenu
+            [model]="items"
+            styleClass="w-full panel-menu sidebar__item__link"
+          >
+            <ng-template pTemplate="item" let-item>
+              <ng-container *ngIf="item.route">
+                <a
+                  [routerLink]="item.route"
+                  class="flex align-items-center cursor-pointer text-color px-3 py-2"
+                  style="padding: 1.2rem"
+                >
+                  <span [class]="item.icon"></span>
+                  <span class="ml-2 text-color">{{ item.label }}</span>
+                </a>
+              </ng-container>
+            </ng-template>
+          </p-panelMenu>
+        </li>
+        <li class="sidebar__menu__item">
+          <a
+            class="sidebar__menu__link"
+            routerLink="/cart"
+            routerLinkActive="active"
+          >
+            <i class="pi pi-shopping-cart"></i>
+            Cart
           </a>
         </li>
-        <li>
-          <a routerLink="/singup" routerLinkActive="active">
-            <i class="pi pi-user-plus pr-1"></i>
+        <li class="sidebar__menu__item">
+          <a
+            class="sidebar__menu__link"
+            routerLink="/singup"
+            routerLinkActive="active"
+          >
+            <i class="pi pi-user-plus"></i>
             Sign up
           </a>
         </li>
-        <li>
-          <a routerLink="/login" routerLinkActive="active">
-            <i class="pi pi-user"></i>
+        <li class="sidebar__menu__item">
+          <a
+            class="sidebar__menu__link"
+            routerLink="/login"
+            routerLinkActive="active"
+          >
+            <i class="pi pi-sign-in"></i>
             Login
           </a>
         </li>

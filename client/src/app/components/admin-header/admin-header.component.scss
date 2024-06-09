@@ -1,0 +1,23 @@
+@import "../../../styles/variables";
+
+
+
+.dropdown.notification_dropdown {
+  .nav-link {
+    position: relative;
+
+    svg {
+      font-size: 1.5rem;
+    }
+
+    .badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 50%;
+      background-color: $primary-color;
+    }
+  }
+}

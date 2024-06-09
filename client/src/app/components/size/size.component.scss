@@ -1,0 +1,17 @@
+@import "../../../styles/variables";
+
+.size__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $border-color;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 8px;
+
+  &:hover,
+  &.active {
+    background: $primary-color;
+    color: white;
+  }
+}

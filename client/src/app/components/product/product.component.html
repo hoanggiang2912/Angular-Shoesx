@@ -1,0 +1,77 @@
+<div
+  class="product por"
+  (mouseover)="onMouseOver($event)"
+  (mouseout)="onMouseOut($event)"
+>
+  <a class="poa abs-full" [routerLink]="['/shop/product/', product._id]"></a>
+  <div class="product__inner">
+    <div class="product__banner mb-2 por oh">
+      <div
+        class="banner banner__cover poa abs-full"
+        style="background-image: url(' {{ product.background }} ')"
+      ></div>
+      <div
+        class="banner banner__overlay poa abs-full bg-black-50 trasnition-opacity-200ms-ease flex flex-center"
+      >
+        <div class="flex flex-center h-fit w-fit gap-2">
+          <button
+            type="button"
+            class="medium full btn-white flex-center rounded-full tool-tip--parent"
+            (click)="
+              addToCart({
+                _id: product._id,
+                title: product.title,
+                price: product.price,
+                background: product.background,
+                salePrice: product.salePrice,
+                qty: 1
+              });
+              $event.stopPropagation()
+            "
+          >
+            <i class="pi pi-cart-plus text-2xl"></i>
+            <div class="tool-tip bottom-center top-3">Add to Cart</div>
+          </button>
+          <button
+            type="button"
+            class="medium full btn-white flex-center rounded-full tool-tip--parent"
+          >
+            <i class="pi pi-search-plus text-2xl"></i>
+            <div class="tool-tip bottom-center">See more</div>
+          </button>
+          <button
+            type="button"
+            class="medium full btn-white flex-center rounded-full tool-tip--parent"
+          >
+            <i class="pi pi-shopping-bag text-2xl"></i>
+            <div class="tool-tip bottom-center top-3">Buy now</div>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="product__info flex flex-col">
+      <h4 class="text-2xl fw-semi-bold capitalize text-inherit flex-1 mb-1">
+        {{ product.title }}
+      </h4>
+      <div class="flex">
+        <div class="flex items-center g-1">
+          @if (product.salePrice) {
+          <p class="text-2xl text-inherit">
+            {{
+              product.price - (product.price * product.salePrice) / 100
+                | currency : "VND" : true
+            }}
+          </p>
+          <p class="text-2xl text-gray-500 line-through ml-2">
+            {{ product.price | currency: "VND": true }}
+          </p>
+          } @else {
+          <p class="text-2xl text-inherit">
+            {{ product.price | currency : "VND" : true }}
+          </p>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

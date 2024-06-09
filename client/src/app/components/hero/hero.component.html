@@ -1,0 +1,19 @@
+<div class="section hero__section por">
+  <h1 class="hero__text uppercase">Stylish Shoes For You</h1>
+  <p
+    class="text-xl leading-normal poa show-in-large-desktop"
+    style="width: 300px; right: 200px; bottom: 50px"
+  >
+    The sneakers are friendly to more people, espesiatly when you want to 100k
+    taller, because many sneakeers have inner heightening shoe poads,
+  </p>
+</div>
+
+<div class="section hero__section hero__section--product flex">
+  @for (product of heroProducts; track product.id) {
+  <app-hero-product
+    [product]="product"
+    [activeDefault]="product.id === 2"
+  ></app-hero-product>
+  }
+</div>

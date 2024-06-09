@@ -1,0 +1,184 @@
+<app-section>
+  <div class="grid">
+    <div class="row">
+      <div class="col l-7 m-6 c-12">
+        <div class="col__inner">
+          <div class="checkout-complete mt-2">
+            <div class="flex items-center gap-2">
+              <div
+                class="checkout-complete__icon"
+                style="width: 60px; height: 60px"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M8.5 12.5L10.5 14.5L15.5 9.5"
+                      stroke="#00ff80"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                    <path
+                      d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                      stroke="#00ff80"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    ></path>
+                  </g>
+                </svg>
+              </div>
+              <div class="">
+                <h4 class="text-2xl uppercase text-tertiary">{{ bill._id }}</h4>
+                <h4 class="text-3xl capitalize text-primary mt-1">
+                  {{ bill.name }}
+                </h4>
+              </div>
+            </div>
+
+            <div class="border-gray border-1 border-solid rounded-lg mt-3">
+              <div class="p-2">
+                <h2 class="text-3xl">
+                  Your order has been successfully placed.
+                </h2>
+                <p class="text-xl mt-1">
+                  Our team will contact to you to confirm your order soon.
+                </p>
+              </div>
+              <div
+                class="bg-gray p-2 form__group flex items-center gap-1"
+                style="background: #d9d9d9"
+              >
+                <input id="email" name="email" type="checkbox" hidden />
+                <label for="email" class="custom-checkbox oh">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M21 7L9 19L3 13"
+                      stroke="#fff"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </label>
+                <label for="email" class="text-xl">
+                  Recieve email notification when your order is confirmed.
+                </label>
+              </div>
+            </div>
+
+            <div class="border-gray border-1 border-solid rounded-lg mt-3">
+              <div class="p-2">
+                <h4 class="text-3xl">Customer informations</h4>
+              </div>
+
+              <div class="p-2 grid">
+                <div class="row">
+                  <div class="col l-6 m-6 c-12 mb-2">
+                    <p class="text-2xl">Contact Information</p>
+                    <p class="text-xl text-secondary mt-2">{{ bill.email }}</p>
+                  </div>
+
+                  <div class="col l-6 m-6 c-12 mb-2">
+                    <p class="text-2xl">Payment Method</p>
+                    <p class="text-xl text-secondary mt-2">
+                      Cash (COD) - {{ bill.total | currency : "VND" }}
+                    </p>
+                  </div>
+
+                  <div class="col l-6 m-6 c-12 mb-2">
+                    <p class="text-2xl">Shipping Address</p>
+                    <p class="text-xl text-secondary mt-2">
+                      {{ bill.address }}
+                      {{ bill.addressDetail }}
+                    </p>
+                  </div>
+
+                  <div class="col l-6 m-6 c-12 mb-2">
+                    <p class="text-2xl">Receiving Address</p>
+                    <p class="text-xl text-secondary mt-2">
+                      {{ bill.address }}
+                      {{ bill.addressDetail }}
+                    </p>
+                  </div>
+
+                  <div class="col l-6 m-6 c-12 mb-2">
+                    <p class="text-2xl">Shipping Method</p>
+                    <p class="text-xl text-secondary mt-2">
+                      {{ bill.shippingMethod }} -
+                      {{ bill.shippingFee | currency : "VND" }}
+                    </p>
+                  </div>
+
+                  @if (bill.note) {
+                  <div class="col l-6 m-6 c-12 mb-2">
+                    <p class="text-2xl">Customer note</p>
+                    <p class="text-xl text-secondary mt-2">
+                      {{ bill.note }}
+                    </p>
+                  </div>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l-5 m-6 c-12">
+        <div class="col__inner">
+          <div
+            class="summary"
+            style="
+              border-top: 1px solid #d9d9d9;
+              border-bottom: 1px solid #d9d9d9;
+              padding-block: 20px;
+            "
+          >
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xl">Subtotal</span>
+              <span class="text-xl">{{
+                bill.subTotal | currency : "VND"
+              }}</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-xl">Shipping</span>
+              <span class="text-xl">{{
+                bill.shippingFee | currency : "VND"
+              }}</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-3xl">Total</span>
+            <span class="text-3xl">{{ bill.total | currency : "VND" }}</span>
+          </div>
+
+          <div class="mt-2 flex justify-between items-center">
+            <span class="text-xl">
+              <span>Need to help?</span>
+              <a href="/" class="text-success underline"> Contact us</a>
+            </span>
+
+            <a
+              href="/"
+              class="btn btn-success rounded-full text-white btn--block mt-2 large"
+              >Continue shopping</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-section>

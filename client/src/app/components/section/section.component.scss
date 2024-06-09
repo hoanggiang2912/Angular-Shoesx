@@ -1,0 +1,31 @@
+@import "../../../styles/_variables.scss";
+
+.section {
+  padding: clamp(3rem, 0.857rem + 5.714vw, 6rem) clamp(1.2rem, -11.514rem + 33.905vw, 19rem);
+  width: 100%;
+
+  .section__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .title {
+      color: $primary-color;
+      font-size: clamp(2.2rem, -0.943rem + 8.381vw, 6.6rem);
+      line-height: clamp(2.6rem, -0.543rem + 8.381vw, 7rem);
+      font-weight: 900;
+      font-family: "FS PF BeauSans Pro";
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .subtitle {
+      width: 400px;
+
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
+    }
+  }
+}

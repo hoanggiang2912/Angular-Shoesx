@@ -1,0 +1,9 @@
+@import '../../../styles/variables';
+
+.sidebar-item {
+  transition: 0.3s linear;
+
+  &:hover {
+    background: lighten($color: $primary-color, $amount: 90);
+  }
+}

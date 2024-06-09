@@ -6,6 +6,7 @@ const registerValidator = (data) => {
     email: Joi.string().min(6).required().email(),
     password: Joi.string().min(8).max(32).required(),
     phone: Joi.string().required().allow(""),
+    name: Joi.string().min(3).required(),
   });
   return schema.validate(data);
 };
@@ -21,6 +22,7 @@ const loginValidator = (data) => {
 const emailValidator = (data) => {
   const schema = Joi.object({
     email: Joi.string().min(6).required().email(),
+    id: Joi.string().required(),
   });
   return schema.validate(data);
 };
@@ -157,31 +159,12 @@ const updateProfileValidator = (data) => {
 
 const adminUserUpdateValidator = (data) => {
   const schema = Joi.object({
-    firstName: Joi.string().min(3).required().messages({
-      "string.empty": "First name is not allowed to be empty!",
-      "string.min": "First name should have a minimum length of {#limit}",
-      "any.required": "First name is a required field",
-    }),
-    lastName: Joi.string().min(3).required().messages({
-      "string.empty": "Last name is not allowed to be empty!",
-      "string.min": "Last name should have a minimum length of {#limit}",
-      "any.required": "Last name is a required field",
-    }),
-    email: Joi.string().min(6).required().email().messages({
-      "string.empty": "Email is not allowed to be empty!",
-      "string.min": "Email should have a minimum length of {#limit}",
-      "any.required": "Email is a required field",
-      "string.email": "Email must be a valid email",
-    }),
-    phone: Joi.string().required().messages({
-      "string.empty": "Phone is not allowed to be empty!",
-      "any.required": "Phone is a required field",
-    }),
     role: Joi.string().required().messages({
       "string.empty": "Role is not allowed to be empty!",
       "any.required": "Role is a required field",
     }),
     note: Joi.string().allow(""),
+    status: Joi.string().allow(""),
   });
 
   return schema.validate(data);
@@ -189,13 +172,10 @@ const adminUserUpdateValidator = (data) => {
 
 const createUserValidator = (data) => {
   const schema = Joi.object({
-    firstName: Joi.string().min(3).allow("").messages({
-      "string.empty": "First name is not allowed to be empty!",
-      "string.min": "First name should have a minimum length of {#limit}",
-    }),
-    lastName: Joi.string().min(3).allow("").messages({
-      "string.empty": "Last name is not allowed to be empty!",
-      "string.min": "Last name should have a minimum length of {#limit}",
+    name: Joi.string().min(3).required().messages({
+      "string.empty": "Name is not allowed to be empty!",
+      "string.min": "Name should have a minimum length of {#limit}",
+      "any.required": "Name is a required field",
     }),
     email: Joi.string().min(6).required().email().messages({
       "string.empty": "Email is not allowed to be empty!",
@@ -217,7 +197,9 @@ const createUserValidator = (data) => {
       "string.empty": "Role is not allowed to be empty!",
       "any.required": "Role is a required field",
     }),
+    status: Joi.string().allow(""),
     note: Joi.string().allow(""),
+    addresses: Joi.string().allow(""),
   });
 
   return schema.validate(data);

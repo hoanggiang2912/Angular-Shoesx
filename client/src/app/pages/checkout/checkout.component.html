@@ -1,0 +1,30 @@
+<app-section>
+  <a href="/home" class="mb-2" style="display: block">
+    <img src="../../../assets/images/Shoesx.svg" alt="Shoex logo" width="180" />
+  </a>
+
+  <p-breadcrumb
+    class="max-w-full"
+    [model]="items"
+    [home]="home"
+    styleClass="breadcrumb"
+  />
+
+  <div class="checkout__form grid mt-3">
+    <div class="row">
+      <div class="checkout__form__left col l-8 m-6 c-12">
+        <app-checkout-form
+          (updateTotal)="updateTotal($event)"
+          (updateShippingFee)="updateShippingFee($event)"
+        ></app-checkout-form>
+      </div>
+      <div class="checkout__form__right col l-4 m-6 c-12">
+        <app-checkout-summary
+          [subTotal]="subTotal"
+          [total]="total"
+          [shippingFee]="shippingFee"
+        ></app-checkout-summary>
+      </div>
+    </div>
+  </div>
+</app-section>

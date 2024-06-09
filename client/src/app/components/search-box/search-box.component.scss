@@ -1,0 +1,55 @@
+@import "../../../styles/variables";
+@import "../../../styles/keyframes";
+
+.search-box--overlay {
+  z-index: 10000;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    animation: rightSlideIn 0.3s forwards;
+  }
+
+  .search-box--inner {
+    width: 60%;
+
+    .search--form {
+      border-radius: 100rem;
+      border: 1px solid $border-color;
+      color: $white;
+      min-width: 30rem;
+      width: 100%;
+      margin-bottom: 7rem;
+
+      .input {
+        border: none;
+        padding: 1.2rem 2rem;
+        background: transparent;
+        color: inherit;
+        width: 100%;
+
+        &::placeholder {
+          color: darken($color: $white, $amount: 20%);
+        }
+      }
+
+      button {
+        color: inherit;
+      }
+    }
+
+    .suggestions {
+      .suggestion-item {
+        transition: 0.2s linear;
+
+        &:hover {
+          background: lighten($color: $overlay, $amount: 10%);
+        }
+      }
+    }
+  }
+}

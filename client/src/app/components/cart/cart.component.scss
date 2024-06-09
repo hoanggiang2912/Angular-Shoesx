@@ -1,0 +1,34 @@
+@import '../../../styles/variables';
+@import '../../../styles/keyframes';
+
+.cart__overlay {
+  display: none;
+  z-index: 100;
+
+  &.active {
+    display: block;
+  }
+
+  &.fade-in {
+    animation: fadeIn .3s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .cart__model {
+    width: 500px;
+    border-radius: 12px;
+    animation: rightSlideIn .3s cubic-bezier(0.19, 1, 0.22, 1);
+
+    @media screen and (max-width: 768px) {
+      width: calc(100% - 40px);
+      animation: bottomSlideIn .3s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .cart__header {
+      border-bottom: 1px solid $border-color;
+    }
+  }
+}
+
+.cart__product__wrapper {
+  overflow-y: auto;
+}

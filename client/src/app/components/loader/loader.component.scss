@@ -1,0 +1,26 @@
+@import '../../../styles/keyframes';
+
+.overlay {
+  background: white;
+  animation: fadeIn 0.5s;
+}
+
+.loader {
+  animation: zoom 5s infinite linear;
+  font-family: 'fs-bf-beausans';
+  font-size: 60px;
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

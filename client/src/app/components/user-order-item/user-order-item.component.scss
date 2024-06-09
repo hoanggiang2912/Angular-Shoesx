@@ -1,0 +1,12 @@
+.order__products {
+  .col {
+    margin: 0;
+  }
+}
+
+.btn-danger {
+  &:disabled {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+}

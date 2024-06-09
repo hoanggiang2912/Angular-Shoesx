@@ -1,0 +1,29 @@
+@import "../../../styles/variables";
+
+.form__group {
+  .custom-checkbox {
+    border: 1px solid $bg-light;
+    border-radius: 8px;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    background: $bg-light;
+
+    svg {
+      background: $primary-color;
+      color: white;
+      transform: scale(0);
+      transition: .25s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+  }
+
+  input[type="checkbox"] {
+    display: none;
+
+    &:checked+.custom-checkbox {
+      svg {
+        transform: scale(1);
+      }
+    }
+  }
+}

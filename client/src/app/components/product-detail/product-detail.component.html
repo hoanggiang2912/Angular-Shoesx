@@ -1,0 +1,130 @@
+<app-section>
+  <div class="grid">
+    <div class="row">
+      <div class="col l-6 m-6 c-12">
+        <p-galleria
+          [value]="product.thumbnails"
+          [thumbnailsPosition]="position"
+          [responsiveOptions]="responsiveOptions"
+          [containerStyle]="{ 'max-width': '640px' }"
+          [numVisible]="5"
+        >
+          <ng-template pTemplate="item" let-item>
+            <img [src]="item" style="width: 100%" />
+          </ng-template>
+          <ng-template pTemplate="thumbnail" let-item>
+            <div class="grid grid-nogutter justify-content-center">
+              <img [src]="item" />
+            </div>
+          </ng-template>
+        </p-galleria>
+      </div>
+      <div class="col l-6 m-6 c-12">
+        <div class="col__inner flex flex-col gap-1" style="margin-left: 80px">
+          <h4 class="uppercase text-tertiary text-2xl">
+            {{ product.idCategory.children }}
+          </h4>
+
+          <h1 class="capitalize text-5xl">{{ product.title }}</h1>
+
+          <div class="product-detail__rating">
+            <p-rating
+              [value]="product.rating"
+              [cancel]="false"
+              [readonly]="true"
+            ></p-rating>
+            <small class="text-secondary"> (0 rating)</small>
+          </div>
+
+          <div class="product-detail__price text-3xl fw-semi-bold">
+            <span>{{ product.price | currency : "VND" }}</span>
+          </div>
+
+          <div class="variants flex items-center gap-1 mt-1">
+            @for (variant of product.variants; track variant.id) {
+            <div
+              class="variant oh"
+              style="width: 80px; height: 80px"
+              (click)="switchVariant(variant)"
+            >
+              <img [src]="variant.background" class="image-cover rounded-xl" />
+            </div>
+            }
+          </div>
+
+          <!-- <div class="sizes">
+            <h4 class="text-2xl fw-bold">Choose your size:</h4>
+            <ul class="flex gap-1 flex-wrap mt-1">
+              @for (size_item of product.size; track $index) {
+              <app-size [size]="size_item" onSizeChange=""></app-size>
+              }
+            </ul>
+          </div> -->
+
+          <p-accordion styleClass="accordion">
+            <p-accordionTab header="Product description">
+              <p class="text-2xl leading-loose">{{ product.description }}</p>
+            </p-accordionTab>
+          </p-accordion>
+          <p-accordion styleClass="accordion">
+            <p-accordionTab header="Free Delivery and Returns">
+              <p class="text-2xl leading-loose">
+                Your order of 5.000.000₫ or more gets free standard delivery.
+                Standard delivered 4-5 Business Days Express delivered 2-4
+                Business Days Orders are processed and delivered Monday-Friday
+                (excluding public holidays) Nike Members enjoy free returns.
+              </p>
+            </p-accordionTab>
+          </p-accordion>
+          <p-accordion styleClass="accordion">
+            <p-accordionTab header="More Info">
+              <p class="text-2xl leading-loose">
+                The ® may appear once or twice on the tongue and/or sockliner as
+                a result of a change implemented by Nike. The product you
+                purchase may appear differently in this respect than the one
+                depicted on Nike.com or NikeApp.
+              </p>
+            </p-accordionTab>
+          </p-accordion>
+
+          <div class="product-detail__actions flex flex-col gap-2">
+            <button
+              class="btn btn-primary text-white large rounded-full gap-1 flex-1"
+              type="button"
+              (click)="addToCart(product)"
+            >
+              <i class="pi pi-plus"></i>
+              Add to cart
+            </button>
+
+            <button
+              class="btn border border-primary bg-white text-primary large rounded-full gap-1 flex-1"
+              type="button"
+              style="border: 2px solid #000"
+            >
+              <i class="pi pi-heart"></i>
+              Add to wishlist
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-section>
+
+<app-section sectionTitle="Related products">
+  <swiper-container
+    slides-per-view="3"
+    speed="500"
+    loop="false"
+    space-between="20"
+    class="product-swiper"
+    width="1000"
+  >
+    @for (product of relatedProducts; track product._id) {
+    <swiper-slide>
+      <app-product [product]="product"></app-product>
+    </swiper-slide>
+    }
+  </swiper-container>
+</app-section>

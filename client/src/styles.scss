@@ -2,6 +2,34 @@
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 @import "styles/variables";
+@import "styles/swiperConfig";
+@import "styles/typo";
+
+.breadcrumb {
+  background: none;
+  border: none;
+
+  .p-breadcrumb-list {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    &:hover {
+      &>* {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.admin-layout {
+  margin-left: 300px;
+  padding: 20px;
+
+  &.grid {
+    width: unset;
+  }
+}
 
 // Path: client/src/styles.css
 *,
@@ -11,7 +39,9 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 62.5% !important;
+  font-family: 'fs-bs-beausans', sans-serif;
+  background: $bg-light;
 }
 
 * {
@@ -33,13 +63,212 @@ select,
 textarea {
   background-color: transparent;
   outline: none;
+
+  &.border {
+    border: 1px solid $border-color;
+    border-radius: 0.45rem;
+    padding: 0.5rem 1rem;
+  }
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.tool-tip--parent {
+  position: relative;
+
+  &:hover {
+    .tool-tip {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.tool-tip {
+  position: absolute;
+
+  &.top {
+    top: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &.right {
+    top: 50%;
+    right: -1.5rem;
+    transform: translateY(-50%);
+  }
+
+  &.bottom {
+    bottom: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &.left {
+    top: 50%;
+    left: -1.5rem;
+    transform: translateY(-50%);
+  }
+
+  &.top-left {
+    top: -1.5rem;
+    left: -1.5rem;
+  }
+
+  &.top-right {
+    top: -1.5rem;
+    right: -1.5rem;
+  }
+
+  &.bottom-left {
+    bottom: -1.5rem;
+    left: -1.5rem;
+  }
+
+  &.bottom-right {
+    bottom: -1.5rem;
+    right: -1.5rem;
+  }
+
+  &.top-center {
+    top: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &.bottom-center {
+    bottom: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &.left-center {
+    top: 50%;
+    left: -1.5rem;
+    transform: translateY(-50%);
+  }
+
+  &.right-center {
+    top: 50%;
+    right: -1.5rem;
+    transform: translateY(-50%);
+  }
+
+  &.top-left-center {
+    top: -1.5rem;
+    left: -1.5rem;
+  }
+
+  &.top-right-center {
+    top: -1.5rem;
+    right: -1.5rem;
+  }
+
+  &.bottom-left-center {
+    bottom: -1.5rem;
+    left: -1.5rem;
+  }
+
+  &.bottom-right-center {
+    bottom: -1.5rem;
+    right: -1.5rem;
+  }
+
+  color: $primary-color;
+  background: $bg-light;
+  box-shadow: 0 0 0.5rem rgba($color: $primary-color, $alpha: 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 0.45rem;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease-in-out;
+  width: max-content;
+  transition-delay: 0.5s;
+}
+
+a,
 button {
   cursor: pointer;
   background-color: transparent;
   outline: none;
   border: 0;
+
+  &.info {
+    background: #2cccff;
+    color: #fff;
+
+    &:hover {
+      background: darken($color: #2cccff, $amount: 8);
+    }
+  }
+
+  &.danger {
+    background: #ff4d4f;
+    color: #fff;
+
+    &:hover {
+      background: darken($color: #ff4d4f, $amount: 8);
+    }
+  }
+
+  &.full {
+    width: 100%;
+    flex: 1 1 0;
+  }
+
+  &.small {
+    padding: 0.5rem 1rem;
+  }
+
+  &.medium {
+    padding: 1.2rem 1.6rem;
+  }
+
+  &.large {
+    padding: 1.6rem 2.4rem;
+  }
+
+  &.icon-btn {
+    border-radius: 100rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.small {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    &.medium {
+      width: 3rem;
+      height: 3rem;
+    }
+
+    &.large {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+  }
+
+  &.btn-transparent {
+    &:hover {
+      background: rgba($color: $primary-color, $alpha: .1);
+    }
+  }
 }
 
 body {
@@ -61,6 +290,72 @@ a {
   cursor: pointer;
 }
 
+// Generate translateX classes
+@for $i from -10 through 10 {
+  .translateX-#{$i} {
+    transform: translateX(#{$i}rem);
+  }
+}
+
+// Generate translateY classes
+@for $i from -10 through 10 {
+  .translateY-#{$i} {
+    transform: translateY(#{$i}rem);
+  }
+}
+
+// Generate translateZ classes
+@for $i from -10 through 10 {
+  .translateZ-#{$i} {
+    transform: translateZ(#{$i}rem);
+  }
+}
+
+.banner {
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.banner__cover {
+  background-size: cover;
+}
+
+.banner__contain {
+  background-size: contain;
+}
+
+.tac {
+  text-align: center;
+}
+
+.tal {
+  text-align: left;
+}
+
+.tar {
+  text-align: right;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-none {
+  display: none;
+}
+
+.d-inline {
+  display: inline;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.section {
+  padding: clamp(3rem, 0.857rem + 5.714vw, 6rem) clamp(1.2rem, -11.514rem + 33.905vw, 19rem);
+}
+
 .poa {
   position: absolute;
 }
@@ -70,6 +365,14 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.abs-full {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .abs-centerX {
@@ -180,9 +483,81 @@ a {
   /* A light gray */
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.oh {
+  overflow: hidden;
+}
+
+// Desktop first approach
+.show-in-large-desktop {
+  display: block;
+}
+
+.show-in-desktop,
+.show-in-tablet,
+.show-in-mobile {
+  display: none;
+}
+
+// Breakpoint for desktop
+@media (max-width: 1199px) {
+  .show-in-large-desktop {
+    display: none !important;
+  }
+
+  .show-in-desktop {
+    display: block !important;
+  }
+}
+
+// Breakpoint for tablet
+@media (max-width: 991px) {
+  .show-in-desktop {
+    display: none !important;
+  }
+
+  .show-in-tablet {
+    display: block !important;
+  }
+}
+
+// Breakpoint for mobile
+@media (max-width: 767px) {
+  .show-in-tablet {
+    display: none !important;
+  }
+
+  .show-in-mobile {
+    display: block !important;
+  }
+}
+
 /* Flex container */
 .flex {
   display: flex;
+}
+
+.flex-i {
+  display: inline-flex;
+}
+
+.flex-important {
+  display: flex !important;
+}
+
+.flex-1 {
+  flex: 1 1 0;
 }
 
 .flex-center {
@@ -258,129 +633,307 @@ a {
   align-items: stretch;
 }
 
-/* Grid container */
+// /* 
+// Column: .col
+// Prefix class:
+//     - c -> column: mobile
+//     - m -> medium: tablet
+//     - l -> large: desktop
+// */
+
 .grid {
-  display: grid;
+  display: block;
+  width: 100%;
+  padding: 0;
 }
 
-/* Grid columns */
-@each $i in 1 through 12 {
-  .grid-cols-#{$i} {
-    grid-template-columns: repeat(#{$i}, 1fr);
+.grid.wide {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-inline: -4px;
+}
+
+.row.no-wrap {
+  flex-wrap: nowrap;
+}
+
+.row.no-gutters {
+  margin-inline: 0;
+}
+
+.row.wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+.row.no-gutters .col {
+  padding-inline: 0;
+}
+
+.col {
+  padding-inline: 4px;
+}
+
+.c-0 {
+  display: none;
+}
+
+.c-2-4 {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+@for $i from 1 through 12 {
+  .c-#{$i} {
+    flex: 0 0 calc(100% / 12 * $i);
+    max-width: calc(100% / 12 * $i);
   }
 }
 
+@for $i from 1 through 12 {
+  .c-o-#{$i} {
+    margin-left: calc(100% / 12 * $i);
+  }
+}
 
-/* Grid gap */
-@each $i in 0 through 4 {
+// || Responsive 
+/* Tablet : with > 740px */
+@media only screen and (min-width: 740px) {
+  .row {
+    margin-inline: -8px;
+  }
+
+  .col {
+    padding-inline: 8px;
+  }
+
+  .m-0 {
+    display: none;
+  }
+
+  .m-2-4 {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+
+  @for $i from 1 through 12 {
+    .m-#{$i} {
+      display: block
+    }
+  }
+
+  @for $i from 1 through 12 {
+    .m-#{$i} {
+      flex: 0 0 calc(100% / 12 * $i);
+      max-width: calc(100% / 12 * $i);
+    }
+  }
+
+  @for $i from 1 through 12 {
+    .m-o-#{$i} {
+      margin-left: calc(100% / 12 * $i);
+    }
+  }
+}
+
+/* Mobile and Tablet: width < 1024px */
+@media only screen and (max-width: 740px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
+/* Tablet - PC low resolution */
+@media (min-width: 740px) and (max-width: 1023px) {
+  .wide {
+    width: 644px;
+  }
+
+  .hide-on-tablet {
+    display: none !important;
+  }
+}
+
+/* PC low resolution */
+@media only screen and (min-width: 1024px) and (max-width: 1239px) {
+  .wide {
+    width: 984px;
+  }
+
+  .wide.row {
+    margin-inline: -12px;
+  }
+
+  .wide.row {
+    padding-inline: -12px;
+  }
+
+  .wide .l-0 {
+    display: none;
+  }
+
+  .wide .l-2-4 {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+
+  @for $i from 1 through 12 {
+    .wide .l-#{$i} {
+      display: block;
+    }
+  }
+
+  @for $i from 1 through 12 {
+    .wide .l-#{$i} {
+      flex: 0 0 calc(100% / 12 * $i);
+      max-width: calc(100% / 12 * $i);
+    }
+  }
+
+  @for $i from 1 through 12 {
+    .wide .l-o-#{$i} {
+      margin-left: calc(100% / 12 * $i);
+    }
+  }
+}
+
+/* PC: width >= 1024px */
+@media only screen and (min-width: 1024px) {
+  .hide-on-desktop {
+    display: none !important;
+  }
+}
+
+/* PC: width >= 1113px */
+@media only screen and (min-width: 1113px) {
+  .row {
+    margin-inline: -12px;
+  }
+
+  .col {
+    padding-inline: 12px;
+  }
+
+  .l-0 {
+    display: none;
+  }
+
+  .l-2-4 {
+    display: block;
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+
+  @for $i from 1 through 12 {
+    .l-#{$i} {
+      display: block
+    }
+  }
+
+  @for $i from 1 through 12 {
+    .l-#{$i} {
+      flex: 0 0 calc(100% / 12 * $i);
+      max-width: calc(100% / 12 * $i);
+    }
+  }
+
+  @for $i from 1 through 12 {
+    .l-o-#{$i} {
+      margin-left: calc(100% / 12 * $i);
+    }
+  }
+}
+
+/* Gap */
+@for $i from 0 through 5 {
   .gap-#{$i} {
     gap: #{$i}rem;
   }
 }
 
-/* Responsive grid */
-@media (min-width: 640px) {
-  @each $i in 1 through 12 {
-    .sm\:grid-cols-#{$i} {
-      grid-template-columns: repeat(#{$i}, 1fr);
-    }
-  }
-}
-
-@media (min-width: 768px) {
-  @each $i in 1 through 12 {
-    .md\:grid-cols-#{$i} {
-      grid-template-columns: repeat(#{$i}, 1fr);
-    }
-  }
-}
-
-@media (min-width: 1024px) {
-  @each $i in 1 through 12 {
-    .lg\:grid-cols-#{$i} {
-      grid-template-columns: repeat(#{$i}, 1fr);
-    }
-  }
-}
-
-@media (min-width: 1280px) {
-  @each $i in 1 through 12 {
-    .xl\:grid-cols-#{$i} {
-      grid-template-columns: repeat(#{$i}, 1fr);
-    }
-  }
-}
-
 /* Margin */
-@each $i in 0 through 5 {
+@for $i from 0 through 5 {
   .m-#{$i} {
     margin: #{$i}rem;
   }
 }
 
 /* Margin Top */
-@each $i in 0 through 5 {
+@for $i from 0 through 5 {
   .mt-#{$i} {
     margin-top: #{$i}rem;
   }
 }
 
 /* Margin Right */
-@each $i in 0 through 5 {
+@for $i from 0 through 5 {
   .mr-#{$i} {
     margin-right: #{$i}rem;
   }
 }
 
 /* Margin Bottom */
-@each $i in 0 through 5 {
+@for $i from 0 through 5 {
   .mb-#{$i} {
     margin-bottom: #{$i}rem;
   }
 }
 
 /* Margin Left */
-@each $i in 0 through 5 {
+@for $i from 0 through 5 {
   .ml-#{$i} {
     margin-left: #{$i}rem;
   }
 }
 
 /* Padding */
-@each $i in 0 through 5 {
+@for $i from 0 through 5 {
   .p-#{$i} {
     padding: #{$i}rem;
   }
 }
 
 /* Padding Top */
-@each $i in 0 through 5 {
+@for $i from 0 through 5 {
   .pt-#{$i} {
     padding-top: #{$i}rem;
   }
 }
 
 /* Padding Right */
-@each $i in 0 through 5 {
+@for $i from 0 through 5 {
   .pr-#{$i} {
     padding-right: #{$i}rem;
   }
 }
 
 /* Padding Bottom */
-@each $i in 0 through 5 {
+@for $i from 0 through 5 {
   .pb-#{$i} {
     padding-bottom: #{$i}rem;
   }
 }
 
 /* Padding Left */
-@each $i in 0 through 5 {
+@for $i from 0 through 5 {
   .pl-#{$i} {
     padding-left: #{$i}rem;
   }
 }
 
+@each $property-name, $property-value in $properties {
+  @each $duration in $durations {
+    @each $timing-function in $timing-functions {
+      .transition-#{$property-name}-#{$duration}-#{$timing-function} {
+        transition: #{$property-value} #{$duration} #{$timing-function};
+      }
+    }
+  }
+}
 
 
 @each $color-name, $color-value in $colors {
@@ -390,6 +943,60 @@ a {
 
   .bg-#{$color-name} {
     background-color: $color-value;
+  }
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+.status {
+  &.success {
+    color: $success-color;
+  }
+
+  &.pending {
+    color: $pending-color;
+  }
+
+  &.delivering {
+    color: $delivering-color;
+  }
+
+  &.delivered {
+    color: $delivered-color;
+  }
+
+  &.paid {
+    color: $success-color;
+  }
+
+  &.return {
+    color: $danger-color;
+  }
+
+  &.cancel {
+    color: $danger-color;
+  }
+
+  &.warning {
+    color: $warning-color;
+  }
+
+  &.danger {
+    color: $danger-color;
+  }
+
+  &.info {
+    color: $info-color;
   }
 }
 
@@ -439,6 +1046,12 @@ a {
   }
 }
 
+@each $font-weight-name, $font-weight-value in $font-weights {
+  .fw-#{$font-weight-name} {
+    font-weight: $font-weight-value;
+  }
+}
+
 @each $style-name, $style-value in $border-styles {
   .border-#{$style-name} {
     border-style: $style-value;
@@ -454,7 +1067,6 @@ a {
 @each $color-name, $color-value in $button-colors {
   .btn-#{$color-name} {
     background-color: $color-value;
-    color: $primary-color;
     padding: 0.375rem 0.75rem;
     border-radius: 0.25rem;
     font-size: 1.4rem;
@@ -519,4 +1131,22 @@ a {
   .shadow-#{$shadow-name} {
     box-shadow: $shadow-value;
   }
+}
+
+/* This will affect the scrollbar globally */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

@@ -1,0 +1,62 @@
+@if (isLoading) {
+<app-loader></app-loader>
+}
+
+<div class="container admin-layout grid p-2">
+  <div class="row">
+    @for (box of statistics; track $index) {
+    <app-statis-box
+      [icon]="box.icon"
+      [title]="box.title"
+      [value]="box.value"
+      [backgroundColor]="box.backgroundColor"
+      [color]="box.color"
+      [redirectTo]="box.redirectTo"
+    ></app-statis-box>
+    }
+  </div>
+
+  <!-- <div class="row mt-3">
+    <div class="col l-6 m-6 c-12">
+      <p-chart type="line" [data]="data" [options]="options" />
+    </div>
+
+    <div class="col l-6 m-6 c-12">
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer Name</th>
+            <th>Order Date</th>
+            <th>Delivery Status</th>
+            <th>Payment Status</th>
+            <th>Order Total</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bill of bills">
+            <td>{{ bill._id }}</td>
+            <td>{{ bill.name }}</td>
+            <td>{{ bill.date | date : "short" }}</td>
+            <td [class]="bill.deliveryStatus" class="status">
+              {{ bill.deliveryStatus }}
+            </td>
+            <td [class]="bill.paymentStatus" class="status">
+              {{ bill.paymentStatus }}
+            </td>
+            <td>{{ bill.total | currency : "VND" }}</td>
+            <td class="flex flex-center">
+              <a
+                [routerLink]="['/admin/orders/order-detail', bill._id]"
+                class="icon-btn medium info"
+              >
+                <i class="pi pi-pencil"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div> -->
+</div>

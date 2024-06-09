@@ -6,36 +6,69 @@
         (click)="openSidebar()"
       >
         <img src="assets/images/menu.svg" alt="menu" />
-        Menu
+        <span class="show-in-large-desktop">Menu</span>
       </button>
-      <ul class="flex gap-3 items-center" style="gap: 34px">
+      <ul
+        class="flex gap-3 items-center show-in-large-desktop"
+        style="gap: 34px"
+      >
         <li>
-          <a routerLink="/" class="text-primary">Men</a>
-        </li>
-        <li>
-          <a routerLink="/" class="text-primary">Women</a>
+          <a routerLink="/shop" class="text-primary">Shop</a>
         </li>
       </ul>
     </nav>
-    <div class="logo flex-1">
+    <div class="logo">
       <a routerLink="/home">
         <img src="assets/images/Shoesx.svg" alt="logo" />
       </a>
     </div>
     <nav class="nav--right flex flex-center" style="gap: 60px">
-      <ul class="flex flex-center" style="gap: 30px">
+      @if (hasUser){
+      <button
+        class="icon-btn user-btn rounded-full text-primary flex flex-center p-1 por"
+        style="border: 1px solid #000220"
+        (click)="toggleUserWidget()"
+      >
+        <i class="pi pi-user"></i>
+
+        <nav
+          class="poa user-widget"
+          [ngClass]="isOpenUserWidget ? 'show' : ''"
+          (click)="$event.stopPropagation()"
+        >
+          <ul>
+            <li>
+              <a [routerLink]="['/user/profile/', user._id]" class="text-2xl">My Account</a>
+            </li>
+            <li>
+              <a [routerLink]="['/user/orders/', user._id]" class="text-2xl">My Orders</a>
+            </li>
+            <li>
+              <a class="text-2xl" (click)="logout()">Log out</a>
+            </li>
+          </ul>
+        </nav>
+      </button>
+      } @else {
+      <ul
+        class="flex flex-center show-in-large-desktop guess-widget"
+        style="gap: 30px"
+      >
         <li>
-          <a routerLink="/cart" class="text-primary">Sign Up</a>
+          <a (click)="openSignUp()" class="text-primary">Sign Up</a>
         </li>
         |
         <li>
-          <a routerLink="/login" class="text-primary">Log In</a>
+          <a (click)="openLogin()" class="text-primary">Log In</a>
         </li>
       </ul>
+      }
 
       <button
-        class="btn-primary flex-center rounded-full"
+        class="btn-primary flex-center rounded-full cart-btn por"
         style="aspect-ratio: 1"
+        (click)="openCart()"
+        [style]="{ width: '38px', height: '38px' }"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -73,9 +106,48 @@
             </clipPath>
           </defs>
         </svg>
+        @if (cartProducts.length > 0) {
+        <span
+          class="cart-count rounded-full primary-text poa"
+          style="
+            right: -10px;
+            top: -10px;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            line-height: 1;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+          "
+          >{{ cartProducts.length }}</span
+        >
+        }
       </button>
     </nav>
   </div>
 </header>
 
-<app-sidebar [isOpen]="isOpen"></app-sidebar>
+<app-sidebar
+  [isOpen]="isOpenSidebar"
+  (close)="closeSidebar()"
+  [isOpenSearchBox]="isOpenSearchBox"
+  (openSearchBox)="openSearchBox()"
+></app-sidebar>
+
+<app-cart [isOpen]="isOpenCart" (close)="closeCart()"></app-cart>
+
+<app-search-box
+  [isOpen]="isOpenSearchBox"
+  (close)="closeSearchBox()"
+></app-search-box>
+
+<app-signup
+  (switch)="switchSignUpLogin()"
+  [isOpen]="isOpenSignUp"
+  (close)="closeSignUp()"
+></app-signup>
+
+<app-login
+  (switch)="switchSignUpLogin()"
+  [isOpen]="isOpenLogin"
+  (close)="closeLogin()"
+  (emitHasUser)="emitHasUser($event)"
+></app-login>

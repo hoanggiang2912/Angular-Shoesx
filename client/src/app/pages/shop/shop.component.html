@@ -1,1 +1,55 @@
-<p>shop works!</p>
+<div>
+  <section class="section" style="padding-block: 2rem">
+    <p-breadcrumb
+      class="max-w-full"
+      [model]="items"
+      [home]="home"
+      styleClass="breadcrumb"
+    />
+  </section>
+
+  <app-shop-bar (toggle)="toggleFilterBar($event)"></app-shop-bar>
+
+  <app-section>
+    <div class="grid">
+      <div class="row shop-layout">
+        <app-filter-sidebar
+          (onFilter)="onFilter($event)"
+          [isShowFilterBar]="isShowFilterBar"
+        ></app-filter-sidebar>
+        <div
+          [ngClass]="
+            isShowFilterBar ? 'col c-12 por l-9 m-8' : 'col c-12 por l-12 m-12'
+          "
+        >
+          @if (isLoading) {
+          <div class="abs-full flex flex-center bg-overlay">
+            <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+          </div>
+          } @if (!isLoading) {
+          <div class="grid">
+            <div class="row">
+              @for (product of products; track product._id) {
+              <app-product
+                [product]="product"
+                class="col l-4 m-6 c-6 product mb-2"
+              ></app-product>
+              }
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+    <p-paginator
+      styleClass="paginator"
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="totalRecords"
+      [rowsPerPageOption]="rowsPerPageOptions"
+    />
+  </app-section>
+
+  <!-- <router-outlet name="productOutlet"></router-outlet> -->
+</div>

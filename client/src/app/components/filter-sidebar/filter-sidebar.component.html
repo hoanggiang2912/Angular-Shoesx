@@ -1,0 +1,36 @@
+<div class="filter-bar">
+  <nav class="filter-nav p-2 rounded-xl bg-white">
+    <ul class="flex flex-col gap-2">
+      @for (category of categories; track $index) {
+      <li>
+        <p-checkbox
+          (onFocus)="fetchCategoryProduct(category.categoryId)"
+          [(ngModel)]="selectedCategories"
+          [label]="category.name"
+          name="group"
+          [value]="category"
+          class="flex items-center gap-1"
+        />
+      </li>
+      }
+    </ul>
+  </nav>
+
+  <p-accordion [activeIndex]="0" styleClass="p-accordion">
+    <p-accordionTab header="Genders">
+      <ul class="flex flex-col gap-2">
+        @for (category of gendersCategories; track $index) {
+        <li>
+          <p-checkbox
+            [(ngModel)]="selectedCategories"
+            [label]="category.name"
+            name="group"
+            [value]="category"
+            class="flex items-center gap-1"
+          />
+        </li>
+        }
+      </ul>
+    </p-accordionTab>
+  </p-accordion>
+</div>

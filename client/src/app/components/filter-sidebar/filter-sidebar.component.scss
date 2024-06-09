@@ -1,0 +1,35 @@
+@import "../../../styles/keyframes";
+
+.filter-bar {
+  &.show {
+    display: block;
+    animation: leftSlideIn 0.5s forwards;
+  }
+
+  &.hide {
+    display: none;
+    animation: leftSlideOut 0.5s forwards;
+  }
+}
+
+.p-accordion {
+  padding: 2rem;
+  border-radius: 8px;
+  background: #fff;
+  margin-top: 20px;
+
+  .p-accordion-header-link {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    align-items: center;
+
+    &>* {
+      margin-bottom: 12px;
+    }
+  }
+
+  .p-accordion-content {
+    border: none;
+  }
+}

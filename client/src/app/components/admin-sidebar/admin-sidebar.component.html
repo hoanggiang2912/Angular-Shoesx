@@ -1,0 +1,39 @@
+<div class="dlabnav">
+  <div class="dlabnav-scroll">
+    <ul class="metismenu" id="menu">
+      <li class="dropdown header-profile">
+        <a
+          class="nav-link flex flex-col"
+          href="javascript:void(0);"
+          role="button"
+          data-bs-toggle="dropdown"
+        >
+          <img
+            src="assets/images/ion/man (1).png"
+            width="60"
+            alt=""
+            class="px-2"
+          />
+          <div class="header-info px-2 ms-3 mt-2 mb-2">
+            <div class="fw-bold">Hi, <strong>Hoang Giang</strong></div>
+            <small class="text-xl fw-normal"
+              >hohoanggiang80&#64;gmail.com</small
+            >
+          </div>
+        </a>
+      </li>
+      @for (item of sidebarItems; track $index) {
+      <li (click)="item.handler && item.handler()">
+        <a
+          [routerLink]="item?.link"
+          aria-expanded="false"
+          class="p-2 rounded-lg d-block nav-item"
+        >
+          <i [class]="item.icon"></i>
+          <span class="nav-text">{{ item.title }}</span>
+        </a>
+      </li>
+      }
+    </ul>
+  </div>
+</div>

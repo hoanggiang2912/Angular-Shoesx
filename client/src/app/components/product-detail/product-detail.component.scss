@@ -1,0 +1,26 @@
+@import "../../../styles/variables";
+
+.accordion {
+  border-radius: 12px;
+  overflow: hidden;
+
+  .p-accordion-header {
+    padding: 2rem;
+    border-bottom: 1px solid $border-color;
+
+    .p-accordion-header-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row-reverse;
+    }
+
+  }
+
+  .p-toggleable-content {
+    .p-accordion-content {
+      padding: 2rem;
+      background: none;
+    }
+  }
+}

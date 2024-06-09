@@ -1,0 +1,68 @@
+<div
+  class="cart__overlay fixed-full bg-overlay"
+  [ngClass]="isOpen ? 'active fade-in' : ''"
+  (click)="closeCart()"
+>
+  <div
+    class="cart__model pof top-20 right-20 bottom-20 left-auto bg-white flex flex-col shadow-lg"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="cart__header flex justify-between items-center p-2">
+      <h2 class="text-4xl fw-semi-bold">Cart</h2>
+      <button class="btn-transparent icon-btn medium" (click)="closeCart()">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+
+    <div class="cart__product__wrapper flex-1">
+      @if (cartProducts.length > 0) { @for (product of cartProducts; track
+      product._id) {
+      <app-cart-product
+        (cartTotalChanged)="updateCartTotal($event)"
+        (remove)="removeFromCart($event)"
+        [product]="product"
+      ></app-cart-product>
+      } } @else {
+      <h4 class="text-2xl primary-text fw-semi-bold tac mt-3">
+        No products in cart
+      </h4>
+      }
+    </div>
+    <div class="cart__summary__wrapper p-1 rounded-lg oh">
+      <div class="cart__summary p-1 bg-white shadow-sm">
+        <form action="#" class="coupon__form flex items-center mb-2 gap-1">
+          <input
+            type="text"
+            class="input flex-1 border"
+            placeholder="Coupon code"
+          />
+          <button class="btn-primary text-white" type="submit">
+            <i class="pi pi-arrow-right"></i>
+          </button>
+        </form>
+
+        <div class="flex justify-between items-center mb-1">
+          <span class="fw-bold">Total</span>
+          <span class="fw-semi-bold">{{ cartTotal | currency : "VND" }}</span>
+        </div>
+        <div class="w-full flex items-center gap-1">
+          <button
+            class="btn-danger rounded-lg text-white"
+            style="height: 44px; width: 44px"
+            (click)="clearCart()"
+          >
+            <i class="pi pi-trash"></i>
+          </button>
+          <button
+            class="checkout-btn btn-primary rounded-lg flex-1 flex flex-center gap-1 text-white"
+            style="height: 44px"
+            (click)="checkout()"
+          >
+            Check out now
+            <i class="pi pi-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

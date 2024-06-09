@@ -1,0 +1,12 @@
+<app-section [sectionTitle]="title" [sectionSubTitle]="sectionSubTitle">
+  <div class="grid mt-3">
+    <div class="row">
+      @for (benefit of benefits; track $index) {
+      <app-benefit-box
+        [benefit]="benefit"
+        class="col l-4 m-6 c-12"
+      ></app-benefit-box>
+      }
+    </div>
+  </div>
+</app-section>

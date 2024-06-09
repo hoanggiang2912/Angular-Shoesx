@@ -1,0 +1,13 @@
+<div
+  (mouseover)="onMouseOver()"
+  (mouseout)="onMouseOut()"
+  class="hero__product por"
+>
+  <div class="hero__product__banner">
+    <img [src]="product.image" alt="" class="banner__holder" />
+  </div>
+  <div class="hero__product__info flex justify-between">
+    <p>{{ product.name }}</p>
+    <p>{{ product.price }}₫</p>
+  </div>
+</div>

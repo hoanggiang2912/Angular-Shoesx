@@ -1,0 +1,16 @@
+.grid.layout {
+  .col {
+    margin: 0;
+
+    &>div {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+select {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 12px;
+}

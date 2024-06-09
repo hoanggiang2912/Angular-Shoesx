@@ -1,0 +1,33 @@
+@import "../../../../styles/variables";
+
+.update-btn {
+  font-size: 14px;
+}
+
+table {
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  border-collapse: collapse;
+  overflow: hidden;
+
+  thead {
+    th {
+      background-color: $bg-light;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 12px 15px;
+    }
+  }
+}
+
+tr {
+  &>* {
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  th {
+    padding: 12px 15px;
+  }
+}

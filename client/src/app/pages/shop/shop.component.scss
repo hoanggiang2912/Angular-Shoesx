@@ -1,0 +1,21 @@
+@import "../../../styles/variables";
+
+.shop-layout {
+  .col {
+    margin: 0 !important;
+  }
+
+  .product {
+    margin-bottom: 2rem;
+  }
+}
+
+.paginator {
+  background: none;
+}
+
+.container {
+  .col:is(:not(.col.product)) {
+    margin: 0;
+  }
+}

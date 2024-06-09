@@ -1,7 +1,17 @@
-<div class="container">
-  <app-header></app-header>
+@if (!isAdmin) {
+<div>
+  <app-header *ngIf="showHeaderAndFooter"></app-header>
 
   <router-outlet></router-outlet>
 
-  <app-footer></app-footer>
+  <app-footer *ngIf="showHeaderAndFooter"></app-footer>
 </div>
+} @else {
+<div>
+  <app-admin-header></app-admin-header>
+
+  <app-admin-sidebar></app-admin-sidebar>
+
+  <router-outlet></router-outlet>
+</div>
+}

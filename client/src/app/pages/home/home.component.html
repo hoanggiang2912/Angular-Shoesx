@@ -1,1 +1,96 @@
-<p>home works!</p>
+<app-hero></app-hero>
+<app-shop-now-banner></app-shop-now-banner>
+<app-why-choose-us></app-why-choose-us>
+<app-section sectionTitle="Most View Products">
+  <swiper-container
+    slides-per-view="3"
+    speed="500"
+    loop="false"
+    space-between="20"
+    class="product-swiper"
+    width="1000"
+  >
+    @for (product of mostViewProducts; track product._id) {
+    <swiper-slide>
+      <app-product [product]="product"></app-product>
+    </swiper-slide>
+    }
+  </swiper-container>
+  <div class="flex flex-center w-full mt-5">
+    <a routerLink="#" class="btn-primary large text-4xl fw-bold text-white">
+      Explore now
+    </a>
+  </div>
+</app-section>
+<app-section sectionTitle="New Arrivals">
+  <swiper-container
+    slides-per-view="3"
+    speed="500"
+    loop="false"
+    space-between="20"
+    class="product-swiper"
+    width="1000"
+  >
+    @for (product of newArrivalProducts; track product._id) {
+    <swiper-slide>
+      <app-product [product]="product"></app-product>
+    </swiper-slide>
+    }
+  </swiper-container>
+  <div class="flex flex-center w-full mt-5">
+    <a routerLink="#" class="btn-primary large text-4xl fw-bold text-white">
+      Explore now
+    </a>
+  </div>
+</app-section>
+<app-section sectionTitle="OUR CUSTOMER SAY’S">
+  <div class="grid">
+    <div class="row flex-center">
+      @for (comment of comments; track comment.id) {
+      <app-comment [comment]="comment"></app-comment>
+      }
+    </div>
+  </div>
+</app-section>
+<app-section sectionTitle="Our Categories">
+  <div class="override-tabView">
+    <p-tabView
+      [style]="{ background: 'none' }"
+      [activeIndex]="0"
+      scrollable="true"
+      styleClass="p-tabView-override"
+      [(activeIndex)]="activeTabIndex"
+      (onChange)="onTabChange($event)"
+    >
+      @for (category of categories; track $index) {
+      <p-tabPanel [header]="category">
+        <swiper-container
+          slides-per-view="3"
+          speed="500"
+          loop="false"
+          space-between="20"
+          class="product-swiper"
+          width="1000"
+        >
+          @for (product of categoryProducts[category]; track product._id) {
+          <swiper-slide>
+            <app-product [product]="product"></app-product>
+          </swiper-slide>
+          }
+        </swiper-container>
+        <div class="flex flex-center w-full mt-5">
+          <a
+            routerLink="#"
+            class="btn-primary large text-4xl fw-bold text-white"
+          >
+            Explore now
+          </a>
+        </div>
+      </p-tabPanel>
+      }
+    </p-tabView>
+  </div>
+</app-section>
+<app-section>
+  <img src="../../../assets/images/join-us-banner.svg" alt="" class="w-full" />
+</app-section>

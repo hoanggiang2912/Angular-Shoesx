@@ -1,0 +1,71 @@
+<p-toast />
+
+<!--**********************************
+          Content body start
+      ***********************************-->
+<div class="content-body container admin-layout grid p-2">
+  <!-- row -->
+  <div class="container-fluid grid">
+    <div class="row">
+      <div class="col l-4 m-6 c-12">
+        <form action="" (submit)="addNewCategory()">
+          <div class="form__inner p-4 rounded-xl bg-white">
+            <div class="form__group w-full">
+              <label for="name">Name: </label>
+              <input
+                type="text"
+                pInputText
+                class="p-2 w-full mt-2"
+                [formControl]="name"
+                [value]="name.value"
+              />
+            </div>
+            <div class="flex items-center justify-end gap-2 mt-4">
+              <button
+                class="btn text-sm rounded-md update-btn btn-primary text-white"
+              >
+                Add new category
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col l-8 m-6 c-12">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Product Quantity</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (category of categories; track category._id) {
+            <tr>
+              <td>{{ category.name }}</td>
+              <td>{{ category.products!.length }}</td>
+              <td class="flex flex-center">
+                <a
+                  [routerLink]="[
+                    '/admin/categories/category-detail/',
+                    category._id
+                  ]"
+                  class="icon-btn medium"
+                >
+                  <i class="pi pi-spin pi-cog"></i>
+                </a>
+                <button (click)="deleteCategory(category._id)">
+                  <i class="pi pi-trash"></i>
+                </button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!--**********************************
+          Content body end
+      ***********************************-->

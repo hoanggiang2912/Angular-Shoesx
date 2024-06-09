@@ -1,25 +1,112 @@
 const CategoriesModel = require("../models/CategoriesModel");
 const ProductsModel = require("../models/ProductsModel");
 
-exports.getAll = async () => {
+exports.getAll = async (query) => {
+  let categories;
+
+  if (query && Object.keys(query).length > 0) {
+    const { product, parent } = query;
+
+    if (product === "true") {
+      try {
+        if (parent === "true") {
+          categories = await CategoriesModel.find({
+            children: { $ne: [] },
+          }).sort({ creationDate: -1 });
+        } else {
+          categories = await CategoriesModel.find().sort({ creationDate: -1 });
+        }
+        const categoriesWithProducts = await Promise.all(
+          categories.map(async (category) => {
+            const products = await ProductsModel.find({
+              "idCategory.parent": category.categoryId,
+            });
+            return {
+              ...category._doc,
+              products,
+            };
+          })
+        );
+        return categoriesWithProducts;
+      } catch (err) {
+        return { message: err.message };
+      }
+    }
+  }
+
   try {
-    const categories = await CategoriesModel.find();
-
-    // const categoriesWithProductAmounts = categories.map(category => ({
-    //     ...category._doc,
-    //     productAmount: category.products.length
-    // }));
-
-    // return categoriesWithProductAmounts;
+    categories = await CategoriesModel.find();
     return categories;
   } catch (err) {
     console.error(err);
   }
 };
 
+exports.getParentCategories = async () => {
+  const categories = await CategoriesModel.find({
+    children: { $ne: [] },
+  });
+
+  return categories;
+};
+
+exports.getCategoriesWithProducts = async (query) => {
+  let categories;
+  let queries;
+
+  if (Object.keys(query).length > 0) {
+    const { product } = query;
+
+    if (product) {
+    }
+  }
+
+  try {
+    const categories = await CategoriesModel.find();
+    const categoriesWithProducts = await Promise.all(
+      categories.map(async (category) => {
+        const products = await ProductsModel.find({
+          categoryId: category.categoryId,
+        });
+        return {
+          category,
+          products,
+        };
+      })
+    );
+    return categoriesWithProducts;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+exports.getChildrenCategories = async () => {
+  const categories = await CategoriesModel.find({
+    children: { $size: 0 },
+  });
+
+  return categories;
+};
+
+exports.getGenderCategories = async () => {
+  const categories = await CategoriesModel.find({
+    isGender: true,
+  });
+
+  return categories;
+};
+
 exports.getOne = async (id) => {
-  const category = await CategoriesModel.findById(id);
-  return category;
+  let category = await CategoriesModel.findById(id);
+
+  const products = await ProductsModel.find({
+    "idCategory.parent": category.categoryId,
+  });
+
+  return {
+    ...category._doc,
+    products,
+  };
 };
 
 exports.update = async (id, category) => {

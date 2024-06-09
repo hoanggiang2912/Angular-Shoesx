@@ -1,0 +1,34 @@
+@import "../../../styles/keyframes.scss";
+
+.form__overlay {
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+}
+
+.form__container {
+  min-width: 600px;
+  width: 700px;
+  overflow: hidden;
+  border-radius: 12px;
+
+  @media (max-width: 768px) {
+    min-width: 100%;
+  }
+
+  .form__group {
+    .form__input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1.6rem;
+    }
+  }
+}

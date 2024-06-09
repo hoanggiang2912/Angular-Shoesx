@@ -1,0 +1,24 @@
+@if (isLoading) {
+<app-loader></app-loader>
+}
+
+<app-section>
+  <div class="grid layout">
+    <div class="row">
+      <div class="col l-4 m-4 c-0">
+        <app-user-sidebar [user]="user"></app-user-sidebar>
+      </div>
+      <div class="col l-8 m-8 c-12">
+        <div class="grid border-1 border-solid border-gray rounded-xl">
+          <div class="row">
+            @for (bill of bills; track $index) {
+            <div class="col l-12 c-12 m-12">
+              <app-user-order-item [bill]="bill"></app-user-order-item>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-section>

@@ -1,0 +1,17 @@
+@import "../../../styles/_variables.scss";
+
+:host {
+  padding-bottom: 2rem;
+}
+
+.benefit__box {
+  border: 1px solid $border-color;
+  transition: .2s linear;
+
+  &:hover {
+    border-color: transparent;
+    background: white;
+    box-shadow: 46px 99px 31px 0px rgba(0, 0, 0, 0.00), 29px 64px 28px 0px rgba(0, 0, 0, 0.01), 16px 36px 24px 0px rgba(0, 0, 0, 0.05), 7px 16px 17px 0px rgba(0, 0, 0, 0.09), 2px 4px 10px 0px rgba(0, 0, 0, 0.10);
+    transform: scale(1.005);
+  }
+}

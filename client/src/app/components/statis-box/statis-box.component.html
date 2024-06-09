@@ -1,0 +1,23 @@
+<div
+  class="admin-box rounded-xl w-full por"
+  [style]="{
+    'background-color': backgroundColor,
+    'color': color,
+  }"
+>
+  <a class="poa abs-full" [routerLink]="[redirectTo]"></a>
+  <div class="p-2 flex flex-col gap-3">
+    <div class="flex items-center justify-between">
+      <h4 class="text-2xl fw-semi-bold">{{ title }}</h4>
+      <div class="icon" style="color: white">
+        <img
+          src="../../../../assets/images/{{ icon }}"
+          alt="{{ title }}"
+          width="30"
+          height="30"
+        />
+      </div>
+    </div>
+    <h2 class="text-2xl fw-bold">{{ value }}</h2>
+  </div>
+</div>

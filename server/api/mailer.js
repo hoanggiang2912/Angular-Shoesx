@@ -1,9 +1,6 @@
-const nodeMailer = require('nodemailer');
-
-
+const nodeMailer = require("nodemailer");
 
 const sendMail = async (email, option = {}) => {
-
   const html = `
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -249,7 +246,7 @@ table, td { color: #000000; } </style>
 
   <div>
     <h2 style="text-align: center; padding: 12px; background: #d9d9d9">
-      <a href="http://127.0.0.1:3000/forgot-password${option?.link}">Click here!</a>
+      <a href="http://localhost:4200/user${option?.link}">Click here!</a>
     </h2>
   </div>
 
@@ -332,30 +329,30 @@ table, td { color: #000000; } </style>
 </html>
 
 `;
-  
-    const transporter = nodeMailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
-        auth: {
-            user: 'hohoanggiang80@gmail.com',
-            pass: 'laka rcey etic yied'
-        }
-    })
 
-    const mailOptions = {
-        from: 'Equator Coffee <hohoanggiang80@gmail.com>',
-        to: email,
-      subject: `Your reset password link is here:`,
-        html: html
-    }
+  const transporter = nodeMailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: "hohoanggiang80@gmail.com",
+      pass: "laka rcey etic yied",
+    },
+  });
 
-    const info = await transporter.sendMail(mailOptions);
+  const mailOptions = {
+    from: "Shoesx - Reset password email <hohoanggiang80@gmail.com>",
+    to: email,
+    subject: `Your reset password link is here:`,
+    html: html,
+  };
 
-    console.log('Message sent: ' + info.messageId);
+  const info = await transporter.sendMail(mailOptions);
 
-    return info;
-}
+  console.log("Message sent: " + info.messageId);
+
+  return info;
+};
 
 module.exports = sendMail;
 

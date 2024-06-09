@@ -1,0 +1,21 @@
+<div class="checkout-product">
+  <div class="flex">
+    <div class="product-banner por" style="width: 80px; height: 100px">
+      <div
+        class="banner banner__cover abs-full"
+        style="background-image: url('{{ product.background }}')"
+      ></div>
+    </div>
+
+    <div class="flex justify-between ml-2 flex-1">
+      <div class="flex flex-col justify-between flex-1">
+        <h3 class="text-2xl fw-bold">{{ product.title }}</h3>
+        <p class="text-xl">{{ product.price | currency : "VND" }}</p>
+      </div>
+
+      <div class="flex flex-col justify-end items-end">
+        <p class="text-2xl uppercase text-primary">x{{ product.qty }}</p>
+      </div>
+    </div>
+  </div>
+</div>

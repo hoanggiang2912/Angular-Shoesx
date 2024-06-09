@@ -1,0 +1,89 @@
+<p-toast />
+<div class="content-body container admin-layout grid p-2">
+  <div class="container-fluid grid">
+    <div class="row">
+      <div class="col l-4 m-6 c-12">
+        <form action="" (submit)="update(category._id)">
+          <div class="form__inner p-4 rounded-xl bg-white">
+            <div class="form__group">
+              <label for="name">Name: </label>
+              <input
+                type="text"
+                pInputText
+                formControlName="name"
+                class="p-2 mt-2 w-full"
+                [formControl]="name"
+                [value]="name.value"
+              />
+            </div>
+            <div class="flex items-center justify-end gap-2 mt-4">
+              <button
+                class="btn text-sm rounded-md update-btn btn-primary text-white"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </form>
+        <nav class="children-category mt-4 bg-white rounded-xl p-4">
+          <ul class="flex flex-col gap-3">
+            @for (category of category.children; track $index) {
+            <li class="flex items-center gap-2">
+              <p-checkbox [id]="category" [value]="category" />
+              <label [for]="category">{{ category }}</label>
+            </li>
+            }
+          </ul>
+        </nav>
+      </div>
+      <div class="col l-8 m-6 c-12">
+        <p-table
+          [value]="category.products!"
+          [tableStyle]="{ 'min-width': '60rem' }"
+          styleClass="rounded-xl oh"
+        >
+          <ng-template pTemplate="caption">
+            <div class="p-3 flex justify-between items-center">
+              Products
+              <span
+                >{{ category.products?.length }}
+                {{ category.products?.length! > 1 ? "items" : "item" }}</span
+              >
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Name</th>
+              <th>Image</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Reviews</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <td>{{ product.title }}</td>
+              <td>
+                <img
+                  [src]="product.background"
+                  [alt]="product.title"
+                  width="100"
+                  class="shadow-4"
+                />
+              </td>
+              <td>{{ product.price | currency : "VND" }}</td>
+              <td>{{ product.idCategory.children }}</td>
+              <td>
+                <p-rating
+                  [(ngModel)]="product.rating"
+                  [readonly]="true"
+                  [cancel]="false"
+                />
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

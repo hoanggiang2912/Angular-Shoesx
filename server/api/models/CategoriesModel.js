@@ -20,6 +20,10 @@ const CategoriesSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  isGender: {
+    type: Boolean,
+    default: false,
+  },
   updationDate: {
     type: Date,
     default: Date.now,

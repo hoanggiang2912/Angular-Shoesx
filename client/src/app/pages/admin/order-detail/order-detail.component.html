@@ -1,0 +1,159 @@
+@if (isLoading) {
+<app-loader></app-loader>
+}
+
+<div class="container admin-layout grid p-2">
+  <div class="grid layout">
+    <form class="row" [formGroup]="orderFormGroup" (submit)="onUpdate()">
+      <div class="col l-8 m-8 c-12">
+        <div class="p-2 border-1 border-solid border-gray rounded-xl oh">
+          <div class="flex items-center justify-between gap-1 w-full">
+            <h4 class="text-2xl fw-bold">Order Detail</h4>
+            <p class="text-2xl text-secondary">
+              {{ bill.date | date : "short" }}
+            </p>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col l-4 m-6 c-12">
+              <div class="flex flex-col gap-1">
+                <h4 class="text-2xl">Customer phone</h4>
+                <p class="text-2xl text-secondary">
+                  {{ bill.phone }}
+                </p>
+              </div>
+            </div>
+
+            <div class="col l-4 m-6 c-12">
+              <div class="flex flex-col gap-1">
+                <h4 class="text-2xl">Customer name</h4>
+                <p class="text-2xl text-secondary">
+                  {{ bill.name }}
+                </p>
+              </div>
+            </div>
+
+            <div class="col l-4 m-6 c-12">
+              <div class="flex flex-col gap-1">
+                <h4 class="text-2xl">Customer email</h4>
+                <p class="text-2xl text-secondary">
+                  {{ bill.email }}
+                </p>
+              </div>
+            </div>
+
+            <div class="col l-4 m-6 c-12">
+              <div class="flex flex-col gap-1">
+                <h4 class="text-2xl">Order address</h4>
+                <p class="text-2xl text-secondary leading-normal">
+                  {{ bill.address }}
+                  {{ bill.addressDetail }}
+                </p>
+              </div>
+            </div>
+
+            <div class="col l-4 m-6 c-12">
+              <div class="flex flex-col gap-1">
+                <h4 class="text-2xl">Delivery address</h4>
+                <p class="text-2xl text-secondary leading-normal">
+                  {{ bill.address }}
+                  {{ bill.addressDetail }}
+                </p>
+              </div>
+            </div>
+
+            <div class="col l-4 m-6 c-12">
+              <div class="flex flex-col gap-1">
+                <h4 class="text-2xl">Order note</h4>
+                <p class="text-2xl text-secondary leading-normal">
+                  {{ bill.note }}
+                </p>
+              </div>
+            </div>
+
+            <div class="col l-4 m-6 c-12">
+              <div class="flex flex-col gap-1">
+                <h4 class="text-2xl">Delivery status</h4>
+                <select name="" id="" formControlName="deliveryStatus">
+                  <option value="pending">Pending</option>
+                  <option value="delivering">Delivering</option>
+                  <option value="delivered">Delivered</option>
+                  <option value="cancel">Cancel</option>
+                  <option value="returning">Returning</option>
+                  <option value="returned">Returned</option>
+                </select>
+              </div>
+            </div>
+            <div class="col l-4 m-6 c-12">
+              <div class="flex flex-col gap-1">
+                <h4 class="text-2xl">Payment status</h4>
+                <select name="" id="" formControlName="paymentStatus">
+                  <option value="pending">Pending</option>
+                  <option value="paid">Paid</option>
+                  <option value="cancel">Cancel</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-end items-center gap-1">
+            <button class="btn btn-danger text-white rounded-full oh medium">
+              Discard
+            </button>
+            <button class="btn btn-primary text-white rounded-full oh medium">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col l-4 m-4 c-12">
+        <div class="p-2 border-1 border-solid border-gray rounded-xl oh">
+          <div class="justify-between items-center flex">
+            <h4 class="text-2xl fw-bold">Order Summary</h4>
+            <button class="btn btn-primary text-white">
+              <i class="pi pi-print"></i> Print
+            </button>
+          </div>
+
+          <div class="order-products mt-2">
+            @for(product of bill.products; track product._id) {
+            <div class="mb-2">
+              <app-checkout-product [product]="product"></app-checkout-product>
+            </div>
+            }
+          </div>
+
+          <div class="flex justify-between items-center mt-2">
+            <h4 class="text-2xl">Subtotal</h4>
+            <p class="text-2xl text-secondary">
+              {{ bill.subTotal | currency : "VND" }}
+            </p>
+          </div>
+          <div class="flex justify-between items-center mt-2">
+            <h4 class="text-2xl">Shipping</h4>
+            <p class="text-2xl text-secondary">
+              {{ bill.shippingMethod }} -
+              {{ bill.shippingFee | currency : "VND" }}
+            </p>
+          </div>
+          <div class="flex justify-between items-center mt-2">
+            <h4 class="text-2xl">Payment method</h4>
+            <p class="text-2xl text-secondary capitalize">
+              {{ bill.paymentMethod }}
+            </p>
+          </div>
+          <div
+            class="flex justify-between items-center mt-2 pt-2"
+            style="border-top: 1px solid #ccc"
+          >
+            <h4 class="text-3xl">Total</h4>
+            <p class="text-4xl text-secondary">
+              {{ bill.total | currency : "VND" }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

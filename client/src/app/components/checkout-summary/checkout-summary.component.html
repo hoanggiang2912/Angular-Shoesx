@@ -1,0 +1,18 @@
+<div class="checkout__summary flex flex-col gap-2">
+  <div class="cart-product__wrapper p-2 rounded-lg flex flex-col gap-2">
+    @for (product of cart; track product._id) {
+    <app-checkout-product [product]="product"></app-checkout-product>
+    }
+  </div>
+
+  <div class="summary bg-white p-2 rounded-lg">
+    <div class="flex justify-between items-center mb-2">
+      <span>Subtotal</span>
+      <span>{{ subTotal | currency : "VND" }}</span>
+    </div>
+    <div class="flex justify-between items-center">
+      <span>Shipping</span>
+      <span>{{ shippingFee || 0 | currency : "VND" }}</span>
+    </div>
+  </div>
+</div>

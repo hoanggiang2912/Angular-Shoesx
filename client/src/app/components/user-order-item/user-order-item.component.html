@@ -1,0 +1,76 @@
+<div class="order p-2" style="border-bottom: 1px solid #d9d9d9">
+  <div class="order__header bg-gray flex justify-between items-center">
+    <h2 class="order__title fw-bold">Order</h2>
+    <p class="order__info-value mt-1 text-secondary">{{ bill._id }}</p>
+  </div>
+  <div class="order__content mt-2 grid">
+    <div class="order__info row">
+      <div class="order__info-item col l-6 m-6 c-12 mb-2">
+        <p class="order__info-title text-2xl">Order date</p>
+        <p class="order__date text-secondary mt-1">
+          {{ bill.date | date : "dd/MM/yyyy" }}
+        </p>
+      </div>
+      <div class="order__info-item col l-6 m-6 c-12 mb-2">
+        <p class="order__info-title text-2xl">Total</p>
+        <p class="order__info-value text-secondary mt-1">
+          {{ bill.total | currency : "VND" : true }}
+        </p>
+      </div>
+      <div class="order__info-item col l-6 m-6 c-12 mb-2">
+        <p class="order__info-title text-2xl">Payment Method</p>
+        <p class="order__info-value text-secondary mt-1 capitalize">
+          {{ bill.paymentMethod }}
+        </p>
+      </div>
+      <div class="order__info-item col l-6 m-6 c-12 mb-2">
+        <p class="order__info-title text-2xl">Payment Status</p>
+        <p class="order__info-value text-secondary mt-1 capitalize">
+          {{ bill.paymentStatus }}
+        </p>
+      </div>
+      <div class="order__info-item col l-6 m-6 c-12 mb-2">
+        <p class="order__info-title text-2xl">Delivery Status</p>
+        <p class="order__info-value text-secondary mt-1 capitalize">
+          {{ bill.deliveryStatus }}
+        </p>
+      </div>
+    </div>
+    <div class="order__products grid layout">
+      <swiper-container
+        slides-per-view="3"
+        speed="500"
+        loop="false"
+        space-between="20"
+        class="product-swiper"
+      >
+        @for (product of bill.products; track product._id) {
+        <swiper-slide>
+          <div class="order__product col">
+            <div class="order__product-image">
+              <img [src]="product.background" alt="product.name" />
+            </div>
+            <div class="order__product-info mt-1">
+              <p class="order__product-name">{{ product.title }}</p>
+              <p class="order__product-price mt-1">
+                {{ product.price | currency : "VND" : true }}
+              </p>
+              <p class="order__product-quantity mt-1">
+                Quantity: {{ product.qty }}
+              </p>
+            </div>
+          </div>
+        </swiper-slide>
+        }
+      </swiper-container>
+      <div class="order__info-item col l-12 m-12 c-12 mb-2">
+        <button
+          class="btn btn-danger rounded-full medium text-white"
+          (click)="cancelBill(bill._id)"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
